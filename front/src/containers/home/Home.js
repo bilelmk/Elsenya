@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import RegisterMap from "../map/RegisterMap";
+
 function Home() {
   const [count, setCount] = useState(0);
 
@@ -11,6 +14,7 @@ function Home() {
         <br />
         <Link to="/information/article">article</Link>
       </div>
+        <RegisterMap/>
     </div>
   );
 }
