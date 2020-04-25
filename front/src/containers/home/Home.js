@@ -6,7 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import { NavLink} from "react-router-dom";
 import { Route } from "react-router-dom" ;
@@ -14,7 +13,7 @@ import { Route } from "react-router-dom" ;
 import './Home.css'
 
 import Library from "../library/Library";
-import RegisterMap from "../map/RegisterMap";
+import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +51,7 @@ function Home() {
                       </Toolbar>
                   </AppBar>
               </div>
-            <Route path="/home" exact component={RegisterMap} />
+            <Route path="/home" exact component={HomeMap} />
             <Route path="/home/library" exact  component={Library} />
             <Route path="/home/information" exact component={Information} />
         </div>
