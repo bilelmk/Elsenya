@@ -38,14 +38,14 @@ const routes = [
 function App() {
   return (
     <Router>
-    <div>
       <Switch>
         <Redirect exact from="/" to="/home" />
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
       </Switch>
-    </div>
+
+      
   </Router>
   );
 }

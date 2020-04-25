@@ -20,14 +20,10 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
-import AdminInformation from "./admin-information/AdminInformation";
-import AdminLibrary from "./admin-library/AdminLibrary";
 
-import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import "./Admin.css";
-import AdminSideBar from "../adminSideBar/AdminSideBar";
+import "../admin/Admin.css";
 
 const drawerWidth = 300;
 
@@ -88,56 +84,65 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Admin() {
+function AdminSideBar(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
+console.log(props)
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
-        <Toolbar>
-          <Typography variant="h6" noWrap className={classes.title}>
-            Persistent drawer
-          </Typography>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="end"
-            onClick={handleDrawerOpen}
-            className={clsx(open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        <Route path="/admin/admin-library" exact component={AdminLibrary} />
-        <Route path="/admin" exact component={AdminInformation} />
-      </main>
+      
 
-      <AdminSideBar handleDrawerClose={handleDrawerClose} open={open} />
-    </div>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="right"
+        open={props.open}
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={props.handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          <Link to="/admin" className="link">
+            <ListItem button key="Informations">
+              <ListItemIcon>
+                <InfoOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="المعلومات" />
+            </ListItem>
+          </Link>
+
+          <Link to="/admin/admin-library" className="link">
+            <ListItem button key="Biblio">
+              <ListItemIcon>
+                <LibraryBooksOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="المكتبة" />
+            </ListItem>
+          </Link>
+        </List>
+
+        <Divider />
+
+        <List>
+          <ListItem button key="Logout">
+            <ListItemIcon>
+              <ExitToAppOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="تسجيل خروج" />
+          </ListItem>
+        </List>
+      </Drawer>
   );
 }
 
-export default Admin;
+export default AdminSideBar;
