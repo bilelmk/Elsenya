@@ -4,7 +4,7 @@ import { Icon } from "leaflet" ;
 
 export class RegisterMap extends Component {
     render(){
-        return <Map center={[45.421532 , -75.697189]} zoom={12}>
+        return <Map center={[33.979809 , 9.435263]} zoom={7}>
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 />

@@ -6,12 +6,9 @@ import {
   Redirect
 } from "react-router-dom";
 import  Home  from "./containers/home/Home";
-import  Information  from "./containers/information/Information";
-import  Article  from "./containers/article/Article";
+import  Admin from "./containers/admin/Admin";
 
 import './App.css';
-
-
 
 // A special wrapper for <Route> that knows how to
 // handle "sub"-routes by passing them in a `routes`
@@ -34,15 +31,9 @@ const routes = [
     component: Home
   },
   {
-    path: "/information",
-    component: Information,
-    routes: [
-      {
-        path: "/information/article",
-        component: Article
-      }
-    ]
-  }
+    path: "/admin",
+    component: Admin
+  },
 ];
 function App() {
   return (
