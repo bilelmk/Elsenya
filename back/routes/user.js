@@ -5,10 +5,19 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.post("/signup", (req, res, next) => {
+
   bcrypt.hash(req.body.password, 10).then(hash => {
     User.create({
         email: req.body.email,
-        password: hash
+        password: hash ,
+        username :req.body.username,
+        firstname :req.body.firstname,
+        lastname :req.body.lastname,
+        place : req.body.place,
+        longitude :req.body.longitude,
+        latitude : req.body.latitude,
+        comment: req.body.comment,
+        agriculture:req.body.agriculture
       })
       .then(result => {
         res.status(201).json({
@@ -58,5 +67,19 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+router.get("/", (req, res, next) => {
+  User.findAll()
+    .then(
+        resources => {
+          res.statusCode = 200;
+          res.setHeader("Content-Type", "application/json");
+          res.json(resources);
+        },
+        err => next(err)
+    )
+    .catch(err => next(err));
+})
+
 
 module.exports = router;

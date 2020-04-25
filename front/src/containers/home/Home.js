@@ -15,6 +15,7 @@ import './Home.css'
 import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
+import Register from "../register/Register";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -76,7 +77,7 @@ function Home() {
                     المكتبة
                 </Button>
             </NavLink>
-
+            <Register/>
         </div>
     </div>
   );
