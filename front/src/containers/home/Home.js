@@ -10,6 +10,7 @@ import Information from "../information/Information";
 import Header from "../header/Header";
 import SideBar from "../sideBar/SideBar";
 
+
 function Home() {
   return (
     <div className="container">
@@ -20,6 +21,9 @@ function Home() {
           <Route path="/home" exact component={HomeMap} />
           <Route path="/home/library" exact component={Library} />
           <Route path="/home/information" exact component={Information} />
+        
+
+
         </Switch>
       </div>
 

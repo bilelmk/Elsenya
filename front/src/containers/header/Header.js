@@ -6,8 +6,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import Button from "@material-ui/core/Button";
+import { Link} from "react-router-dom";
 
-
+import './Header.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,7 +40,7 @@ function Header() {
           <Typography variant="h6" className={classes.title}>
             News
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit"><Link style={{color:'white'}} to="/sign-in">Login</Link></Button>
         </Toolbar>
       </AppBar>
     </div>

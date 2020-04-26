@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-import  Home  from "./containers/home/Home";
-import  Admin from "./containers/admin/Admin";
-
-import './App.css';
+import Home from "./containers/home/Home";
+import Admin from "./containers/admin/Admin";
+import SignIn from './containers/signInPage/SignInPage';
+import SignUp from './containers/signUpPage/SignUpPage';
+import "./App.css";
 
 // A special wrapper for <Route> that knows how to
 // handle "sub"-routes by passing them in a `routes`
@@ -33,7 +34,7 @@ const routes = [
   {
     path: "/admin",
     component: Admin
-  },
+  }
 ];
 function App() {
   return (
@@ -43,10 +44,10 @@ function App() {
         {routes.map((route, i) => (
           <RouteWithSubRoutes key={i} {...route} />
         ))}
+        <Route path="/sign-in" exact component={SignIn} />
+        <Route path="/sign-up" exact component={SignUp} />
       </Switch>
-
-      
-  </Router>
+    </Router>
   );
 }
 
