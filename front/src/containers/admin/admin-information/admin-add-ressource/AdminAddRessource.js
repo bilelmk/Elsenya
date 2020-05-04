@@ -19,7 +19,7 @@ function AdminAddRessource(props) {
 
     const handleInput = (type ,file , valid) => {
         if(valid){
-            setContent(file)
+            setContent(file);
             setType(type)
         }
     };
@@ -29,6 +29,7 @@ function AdminAddRessource(props) {
         ressource.append('title' , title) ;
         ressource.append('content' , content) ;
         ressource.append('type' , type) ;
+        ressource.append('informationId' , props.data)
         axios.post(baseURL + "resources" , ressource)
             .then(res => {
                 console.log(res);

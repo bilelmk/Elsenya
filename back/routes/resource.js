@@ -24,8 +24,7 @@ const storage = multer.diskStorage({
     }
 });
 
-router
-  .route("/")
+router.route("/")
   .get((req, res, next) => {
     Resource.findAll()
       .then(
@@ -44,7 +43,8 @@ router
     Resource.create({
       title: req.body.title,
       content:  url + "/data/" + req.file.filename ,
-      type: req.body.type
+      type: req.body.type ,
+      informationId : req.body.informationId
     })
       .then(
         resource => {
@@ -66,5 +66,19 @@ router
     res.statusCode = 403;
     res.end("DELETE operation not supported on /resources");
   });
+
+router.route('/:Id')
+    .get((req, res, next) => {
+        Resource.findAll({ where : { informationId : req.params.Id }})
+            .then(
+                resources => {
+                    res.statusCode = 200;
+                    res.setHeader("Content-Type", "application/json");
+                    res.json(resources);
+                },
+                err => next(err)
+            )
+            .catch(err => next(err));
+    });
 
 module.exports = router;

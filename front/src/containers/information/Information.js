@@ -9,7 +9,7 @@ export class Information extends Component {
     };
 
     componentDidMount() {
-        axios.get(baseURL + "resources")
+        axios.get(baseURL + "resources/5")
             .then(res =>{
                 console.log(res.data)
                 this.setState( {
