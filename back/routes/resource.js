@@ -1,6 +1,28 @@
 const express = require("express");
 const Resource = require("../models/resource");
 const router = express.Router();
+const multer = require('multer') ;
+const MIME_TYPE_MAP = require('../util/mime-type') ;
+const uuid = require('uuid/v1') ;
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const isValid = MIME_TYPE_MAP[file.mimetype];
+        let error = new Error("Invalid mime type");
+        if (isValid) {
+            error = null;
+        }
+        cb(error, "data");
+    },
+    filename: (req, file, cb) => {
+        const name = file.originalname
+            .toLowerCase()
+            .split(" ")
+            .join("-");
+        const ext = MIME_TYPE_MAP[file.mimetype];
+        cb(null, uuid() + "." + ext);
+    }
+});
 
 router
   .route("/")
@@ -17,10 +39,11 @@ router
       .catch(err => next(err));
   })
 
-  .post((req, res, next) => {
+  .post(multer({ storage: storage }).single("content") ,(req, res, next) => {
+    const url = req.protocol + "://" + req.get("host");
     Resource.create({
       title: req.body.title,
-      content: req.body.content,
+      content:  url + "/data/" + req.file.filename ,
       type: req.body.type
     })
       .then(

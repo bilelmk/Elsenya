@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {Component} from 'react'
 
-const AdminLibrary = () => {
-    return <h1>Admin Library</h1>
+class AdminLibrary extends Component {
+
+    render(){
+        return <div>
+                    <h1>Admin Library</h1>
+                </div>
+    }
+
 }
 
 export default AdminLibrary

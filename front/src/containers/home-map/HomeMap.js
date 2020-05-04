@@ -1,12 +1,12 @@
 import React ,  { Component } from 'react'
 import { Map , Marker , Popup , TileLayer} from "react-leaflet";
 import axios from 'axios' ;
-
+import baseURL from "../../utils/baseURL";
 
 class HomeMap extends Component {
 
     componentDidMount() {
-        axios.get("http://localhost:3001/users")
+        axios.get(baseURL + "users")
             .then(res =>this.setState( {users : res.data}))
             .catch(err => console.log(err))
     }
@@ -50,7 +50,6 @@ class HomeMap extends Component {
             )}
         </Map>
     }
-
-};
+}
 
 export default HomeMap ;

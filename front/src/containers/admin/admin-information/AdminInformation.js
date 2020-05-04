@@ -1,8 +1,8 @@
 import React from 'react' ;
-
+import AdminInformationTable from "./admin-information-table/AdminInformationTable";
 
 const AdminInformation = () => {
-    return <h1>Admin Inforamtion</h1>
+    return <AdminInformationTable/>
 };
 
 export default AdminInformation

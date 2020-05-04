@@ -34,6 +34,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/", express.static(path.join(__dirname, "react app")));
+app.use("/data", express.static(path.join(__dirname, "data")));
+
 
 app.use("/informations", informationRoutes);
 app.use("/users", userRoutes);

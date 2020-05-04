@@ -15,9 +15,7 @@ router.route('/')
     })
 
     .post( (req, res, next) => {
-        Information.create({
-            content : req.body.content
-        })
+        Information.create(req.body)
             .then((information) => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -34,6 +32,35 @@ router.route('/')
     .delete((req, res, next) => {
         res.statusCode = 403;
         res.end('DELETE operation not supported on /informations');
+    });
+
+router.route('/:Id')
+    .post((req, res, next) => {
+        res.statusCode = 403;
+        res.end('POST operation not supported on /informations/'+ req.params.Id);
+    })
+
+    // Update information
+    .put((req, res, next) => {
+        Information.update(
+            req.body, { where : { id : req.params.Id }})
+            .then((information) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(information);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+    })
+
+    // Delete information by id
+    .delete((req, res, next) => {
+        Information.destroy({ where: { id : req.params.Id }})
+            .then((resp) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(resp);
+            }, (err) => next(err))
+            .catch((err) => next(err));
     });
 
 

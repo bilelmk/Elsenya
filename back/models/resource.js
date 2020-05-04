@@ -13,11 +13,11 @@ const Resource = sequelize.define('resource' , {
         allowNull : false ,
     },
     content : {
-        type : Sequelize.INTEGER ,
+        type : Sequelize.STRING ,
         allowNull : true ,
     },
     type : {
-        type : Sequelize.INTEGER ,
+        type : Sequelize.STRING ,
         allowNull : true ,
     },
 });
