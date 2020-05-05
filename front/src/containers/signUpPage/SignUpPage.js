@@ -57,8 +57,8 @@ export default function SignUp() {
   const [place, setPlace] = useState("");
   const [comment, setComment] = useState("");
   const [agriculture, setAgriculture] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
   useEffect(() => {});
 
@@ -228,9 +228,6 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

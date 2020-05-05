@@ -1,54 +1,60 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
 } from "react-router-dom";
 import Home from "./containers/home/Home";
 import Admin from "./containers/admin/Admin";
 import SignIn from './containers/signInPage/SignInPage';
 import SignUp from './containers/signUpPage/SignUpPage';
 import "./App.css";
+import UserContext from "./context/UserContext";
+import jwt from "jsonwebtoken";
 
 // A special wrapper for <Route> that knows how to
 // handle "sub"-routes by passing them in a `routes`
 // prop to the component it renders.
 function RouteWithSubRoutes(route) {
-  return (
-    <Route
-      path={route.path}
-      render={props => (
-        // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
-      )}
-    />
-  );
+    return (
+        <Route
+            path={route.path}
+            render={props => (
+                // pass the sub-routes down to keep nesting
+                <route.component {...props} routes={route.routes}/>
+            )}
+        />
+    );
 }
 
 const routes = [
-  {
-    path: "/home",
-    component: Home
-  },
-  {
-    path: "/admin",
-    component: Admin
-  }
+    {
+        path: "/home",
+        component: Home
+    },
+    {
+        path: "/admin",
+        component: Admin
+    }
 ];
+
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Redirect exact from="/" to="/home" />
-        {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
-        ))}
-        <Route path="/sign-in" exact component={SignIn} />
-        <Route path="/sign-up" exact component={SignUp} />
-      </Switch>
-    </Router>
-  );
+    let user = jwt.decode(localStorage.getItem('jwToken'));
+    return (
+
+            <Router>
+                <Switch>
+                    <Redirect exact from="/" to="/home"/>
+                    {routes.map((route, i) => (
+                        <RouteWithSubRoutes key={i} {...route} />
+                    ))}
+                    <Route path="/sign-in" exact component={SignIn}/>
+                    <Route path="/sign-up" exact component={SignUp}/>
+                </Switch>
+            </Router>
+
+    );
 }
 
 export default App;
