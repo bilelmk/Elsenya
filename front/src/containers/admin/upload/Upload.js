@@ -30,7 +30,7 @@ const Upload = props =>{
         else {
             return ".pdf"
         }
-    }
+    };
 
     const uploadVideo = event => {
         let pickedFile;
@@ -44,7 +44,7 @@ const Upload = props =>{
             setIsValid(false);
             fileIsValid = false;
         }
-        props.onInput( props.type ,pickedFile, fileIsValid);
+        props.onInput( props.type , pickedFile , fileIsValid);
     };
 
     const selectVideo = () => {
