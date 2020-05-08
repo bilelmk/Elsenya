@@ -12,9 +12,12 @@ function AdminDeleteInformation(props) {
     const handleDelete= () => {
         axios.delete(baseURL +"informations/" + props.data)
             .then(res => {
+                props.updateTable("delete" , props.data)
                 props.close()
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">

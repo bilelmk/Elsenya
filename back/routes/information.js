@@ -25,8 +25,14 @@ router.route('/')
     })
 
     .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end('PUT operation not supported on /informations');
+        Information.update(
+            req.body, { where : { id : req.body.id }})
+            .then((information) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(information);
+            }, (err) => next(err))
+            .catch((err) => next(err));
     })
 
     .delete((req, res, next) => {
@@ -37,24 +43,18 @@ router.route('/')
 router.route('/:Id')
     .get((req, res, next) => {
         res.statusCode = 403;
-        res.end('GET operation not supported on /informations/'+ req.params.Id);
+        res.end('GET operation not supported on /informations/'+ req.params.Id );
     })
 
     .post((req, res, next) => {
         res.statusCode = 403;
-        res.end('POST operation not supported on /informations/'+ req.params.Id);
+        res.end('POST operation not supported on /informations/'+ req.params.Id );
     })
 
     // Update information
     .put((req, res, next) => {
-        Information.update(
-            req.body, { where : { id : req.params.Id }})
-            .then((information) => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(information);
-            }, (err) => next(err))
-            .catch((err) => next(err));
+        res.statusCode = 403;
+        res.end('PUT operation not supported on /informations'+ req.params.Id );
     })
 
     // Delete information by id

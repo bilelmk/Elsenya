@@ -21,9 +21,12 @@ function AdminAddInformation(props) {
         };
         axios.post(baseURL +"informations" , information)
             .then(res => {
+                props.updateTable("add" , res.data)
                 props.close()
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+            })
     };
 
     return <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">

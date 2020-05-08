@@ -105,22 +105,46 @@ class AdminInformation extends Component {
             .catch(err => console.log(err))
     }
 
+    updateInformationTable(operation , data) {
+        if(operation === "add"){
+            this.state.informations.push(data) ;
+        }
+        else if(operation === "update"){
+            this.state.informations.map( information => {
+                if (information.id === data.id ) {
+                    information.title = data.title ;
+                    information.description = data.description
+                }
+            })
+        }
+        else if(operation === "delete"){
+            this.state.informations.splice(
+                this.state.informations.findIndex(information => {
+                    return  information.id === data
+                }),1
+            );
+        }
+    }
+
     render ()
     {
         return<div>
             <button onClick={this.openAddDialog.bind(this)} >add</button>
             <AdminAddInformation open={this.state.addData.addDialogOpened}
-                                close={this.closeAddDialog.bind(this)}
+                                 close={this.closeAddDialog.bind(this)}
+                                 updateTable={this.updateInformationTable.bind(this)}
             />
 
             <AdminUpdateInformation open={this.state.updateData.updateDialogOpened}
                                     close={this.closeUpdateDialog.bind(this)}
                                     data={this.state.updateData.data}
+                                    updateTable={this.updateInformationTable.bind(this)}
             />
 
             <AdminDeleteInformation open={this.state.daleteData.deleteDialogOpened}
                                     close={this.closeDeleteDialog.bind(this)}
                                     data={this.state.daleteData.data}
+                                    updateTable={this.updateInformationTable.bind(this)}
             />
 
             <AdminAddRessource open={this.state.addRessourcesData.addRessourcesDialogOpened}

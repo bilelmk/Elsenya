@@ -11,20 +11,25 @@ import baseURL from "../../../../utils/baseURL";
 
 function AdminUpdateInformation(props) {
 
-    const [title, setTitle] = useState( '' );
-    const [description, setDescription] = useState( '');
+    const [title, setTitle] = useState( null );
+    const [description, setDescription] = useState( null);
 
     const handleUpdate= () => {
         let information = {
-            title : title !== '' ? title : props.data.title ,
-            description : description !== '' ? description : props.data.description ,
+            id : props.data.id ,
+            title : title !== null ? title : props.data.title ,
+            description : description !== null ? description : props.data.description ,
         };
-        axios.put(baseURL + "informations/" + props.data.id , information)
+        axios.put(baseURL + "informations" , information)
             .then(res => {
+                props.updateTable("update" , information)
                 props.close()
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err)
+            })
     };
+
 
     return <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Update Information</DialogTitle>
@@ -41,7 +46,7 @@ function AdminUpdateInformation(props) {
                             name="title"
                             autoComplete="title"
                             autoFocus
-                            value={title ? title : props.data ? props.data.title : ''}
+                            value={title !== null ? title : props.data ? props.data.title : ''}
                             onChange={e => setTitle(e.target.value)}
                         />
                     </Grid>
@@ -54,7 +59,7 @@ function AdminUpdateInformation(props) {
                             label="Description"
                             id="description"
                             autoComplete="description"
-                            value={description ? description : props.data ? props.data.description : ''}
+                            value={description !== null ? description : props.data ? props.data.description : ''}
                             onChange={e => setDescription(e.target.value)}
                         />
                     </Grid>
