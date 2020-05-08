@@ -8,13 +8,27 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
+import {makeStyles} from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
+import Backdrop from "@material-ui/core/Backdrop/Backdrop";
+import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
+
+const useStyles = makeStyles((theme) => ({
+    backdrop: {
+        zIndex: 9999,
+        color: '#fff',
+    },
+}));
 
 function AdminUpdateInformation(props) {
 
+    const classes = useStyles();
+    const [openBackdrop, setOpenBackdrop] = React.useState(false);
     const [title, setTitle] = useState( null );
     const [description, setDescription] = useState( null);
 
     const handleUpdate= () => {
+        setOpenBackdrop(true);
         let information = {
             id : props.data.id ,
             title : title !== null ? title : props.data.title ,
@@ -24,57 +38,62 @@ function AdminUpdateInformation(props) {
             .then(res => {
                 props.updateTable("update" , information)
                 props.close()
+                setOpenBackdrop(false);
             })
             .catch(err => {
                 console.log(err)
+                setOpenBackdrop(false);
             })
     };
 
 
-    return <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Update Information</DialogTitle>
-        <DialogContent>
-            <form  noValidate>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="title"
-                            label="Title"
-                            name="title"
-                            autoComplete="title"
-                            autoFocus
-                            value={title !== null ? title : props.data ? props.data.title : ''}
-                            onChange={e => setTitle(e.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            name="description"
-                            label="Description"
-                            id="description"
-                            autoComplete="description"
-                            value={description !== null ? description : props.data ? props.data.description : ''}
-                            onChange={e => setDescription(e.target.value)}
-                        />
-                    </Grid>
-                </Grid>
-            </form>
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={props.close} color="primary">
-                Cancel
-            </Button>
-            <Button color="primary" onClick={handleUpdate}>
-                Update
-            </Button>
-        </DialogActions>
-    </Dialog>
+    return  <div>
+                <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Update Information</DialogTitle>
+                    <DialogContent>
+                        <form  noValidate>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        id="title"
+                                        label="Title"
+                                        name="title"
+                                        autoComplete="title"
+                                        autoFocus
+                                        value={title !== null ? title : props.data ? props.data.title : ''}
+                                        onChange={e => setTitle(e.target.value)}
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        name="description"
+                                        label="Description"
+                                        id="description"
+                                        autoComplete="description"
+                                        value={description !== null ? description : props.data ? props.data.description : ''}
+                                        onChange={e => setDescription(e.target.value)}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </form>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={props.close} color="primary">
+                            Cancel
+                        </Button>
+                        <Button color="primary" onClick={handleUpdate}>
+                            Update
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <MyBackdrop open={openBackdrop} />
+            </div>
 }
 
 export default AdminUpdateInformation ;
