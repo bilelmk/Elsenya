@@ -1,5 +1,6 @@
 import React , { useRef , useState } from 'react'
 import "./Upload.scss"
+import {  VideocamOutlined , ImageOutlined , PictureAsPdfOutlined } from '@material-ui/icons';
 
 const Upload = props =>{
 
@@ -52,11 +53,13 @@ const Upload = props =>{
     };
 
     return (
-        <div>
+        <div className="uploadContainer">
             <div>
                 <input ref={videoInput} onChange={uploadVideo} type="file" id={props.id} accept={getExtensions()} />
             </div>
-            <button type="button" onClick={selectVideo}>{props.type}</button>
+            <button type="button" onClick={selectVideo} className="btn">
+                {props.type === "image" ? <ImageOutlined /> : props.type === "video" ? < VideocamOutlined />  : <PictureAsPdfOutlined /> }
+            </button>
 
         </div>
     )

@@ -9,16 +9,19 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {Link} from "react-router-dom";
+import { Add , DeleteOutline , Update , VideoCallOutlined , VideocamOutlined } from '@material-ui/icons';
+
 import AdminAddInformation from "./admin-add-information/AdminAddInformation";
 import AdminUpdateInformation from "./admin-update-information/AdminUpdateInformation";
 import AdminDeleteInformation from "./admin-delete-information/AdminDeleteInformation" ;
-import AdminAddRessource from "./admin-add-ressource/AdminAddRessource";
-import {Link} from "react-router-dom";
+import AdminAddRessource from "./admin-information-ressource/admin-add-ressource/AdminAddRessource";
 
+import "./AdminInformation.scss"
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#00adb5",
         color: theme.palette.common.white,
     },
     body: {
@@ -109,6 +112,7 @@ class AdminInformation extends Component {
         if(operation === "add"){
             this.state.informations.push(data) ;
         }
+
         else if(operation === "update"){
             this.state.informations.map( information => {
                 if (information.id === data.id ) {
@@ -129,7 +133,10 @@ class AdminInformation extends Component {
     render ()
     {
         return<div>
-            <button onClick={this.openAddDialog.bind(this)} >add</button>
+            <button  className="btn" onClick={this.openAddDialog.bind(this)} >
+                <Add className="icon" />
+            </button>
+
             <AdminAddInformation open={this.state.addData.addDialogOpened}
                                  close={this.closeAddDialog.bind(this)}
                                  updateTable={this.updateInformationTable.bind(this)}
@@ -168,10 +175,25 @@ class AdminInformation extends Component {
                         {this.state.informations.map((information) => (
                             <StyledTableRow key={information.id}>
                                 <StyledTableCell align="center">
-                                    <button onClick={this.openAddRessourcesDialog.bind(this , information.id)} >add ressources</button>
-                                    <button onClick={this.openUpdateDialog.bind(this , information)} >update</button>
-                                    <button onClick={this.openDeleteDialog.bind(this , information.id)} >delete</button>
-                                    <button><Link to={`/admin/information/${information.id}`}>Liste des ressources</Link></button>
+
+                                    <button className="btn" onClick={this.openAddRessourcesDialog.bind(this , information.id)} >
+                                        <VideoCallOutlined className="icon" />
+                                    </button>
+
+                                    <button className="btn">
+                                        <Link  className="link" to={`/admin/information/${information.id}`}>
+                                            <VideocamOutlined className="icon" />
+                                        </Link>
+                                    </button>
+
+                                    <button className="btn" onClick={this.openDeleteDialog.bind(this , information.id)} >
+                                        <DeleteOutline className="icon" />
+                                    </button>
+
+                                    <button className="btn" onClick={this.openUpdateDialog.bind(this , information)} >
+                                        <Update className="icon" />
+                                    </button>
+
                                 </StyledTableCell>
                                 <StyledTableCell align="center">
                                     {information.description}

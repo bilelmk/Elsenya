@@ -7,9 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
 
-import Upload from "../../upload/Upload";
+import Upload from "../../../upload/Upload";
 import axios from 'axios'
-import baseURL from "../../../../utils/baseURL";
+import baseURL from "../../../../../utils/baseURL";
 
 function AdminAddRessource(props) {
 
