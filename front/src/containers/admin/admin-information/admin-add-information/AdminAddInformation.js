@@ -18,19 +18,19 @@ function AdminAddInformation(props) {
     const [description, setDescription] = useState('');
 
     // backdrop state
-    const [openBackdrop, setOpenBackdrop] = React.useState(false);
+    const [openbackdrop, setOpenbackdrop] = useState(false);
 
     // alert state
-    const [open , setOpen] = React.useState(false) ;
-    const [message , setMessage] = React.useState('') ;
-    const [status , setStatus] = React.useState('success')
+    const [open , setOpen] = useState(false) ;
+    const [message , setMessage] = useState('') ;
+    const [status , setStatus] = useState('success') ;
 
     const handleSnackbarClose = () => {
         setOpen(false) ;
     } ;
 
     const handleAdd = () => {
-        setOpenBackdrop(true);
+        setOpenbackdrop(true);
         let information = {
             title : title ,
             description : description
@@ -42,14 +42,14 @@ function AdminAddInformation(props) {
                 setOpen(true) ;
                 setMessage( "Ajout effectué avec succès") ;
                 setStatus("success");
-                setOpenBackdrop(false);
+                setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
                 setOpen(true) ;
                 setMessage( "Erreur lors de l'ajout") ;
                 setStatus("error");
-                setOpenBackdrop(false);
+                setOpenbackdrop(false);
         })
 
     };
@@ -99,7 +99,7 @@ function AdminAddInformation(props) {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <MyBackdrop open={openBackdrop} />
+                <MyBackdrop open={openbackdrop} />
                 <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
     </div>
 }

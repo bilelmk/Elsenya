@@ -7,28 +7,30 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
-import baseURL from "../../../../utils/baseURL";
-import {makeStyles} from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import Backdrop from "@material-ui/core/Backdrop/Backdrop";
+import baseURL from "../../../../utils/baseURL" ;
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
-
-const useStyles = makeStyles((theme) => ({
-    backdrop: {
-        zIndex: 9999,
-        color: '#fff',
-    },
-}));
+import Snachbar from "../../../../components/snackbar/Snackbar";
 
 function AdminUpdateInformation(props) {
 
-    const classes = useStyles();
-    const [openBackdrop, setOpenBackdrop] = React.useState(false);
+    // backdrop state
+    const [openbackdrop, setOpenbackdrop] = useState(false);
+
+    // alert state
+    const [open , setOpen] = useState(false) ;
+    const [message , setMessage] = useState('') ;
+    const [status , setStatus] = useState('success');
+
+    // information state
     const [title, setTitle] = useState( null );
     const [description, setDescription] = useState( null);
 
+    const handleSnackbarClose = () => {
+        setOpen(false) ;
+    } ;
+
     const handleUpdate= () => {
-        setOpenBackdrop(true);
+        setOpenbackdrop(true);
         let information = {
             id : props.data.id ,
             title : title !== null ? title : props.data.title ,
@@ -36,13 +38,19 @@ function AdminUpdateInformation(props) {
         };
         axios.put(baseURL + "informations" , information)
             .then(res => {
-                props.updateTable("update" , information)
-                props.close()
-                setOpenBackdrop(false);
+                props.updateTable("update" , information);
+                props.close();
+                setOpen(true) ;
+                setMessage( "Modification effectué avec succès") ;
+                setStatus("success");
+                setOpenbackdrop(false);
             })
             .catch(err => {
-                console.log(err)
-                setOpenBackdrop(false);
+                console.log(err);
+                setOpen(true) ;
+                setMessage( "Erreur lors de la modification") ;
+                setStatus("error");
+                setOpenbackdrop(false);
             })
     };
 
@@ -92,7 +100,8 @@ function AdminUpdateInformation(props) {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <MyBackdrop open={openBackdrop} />
+                <MyBackdrop open={openbackdrop} />
+                <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
             </div>
 }
 

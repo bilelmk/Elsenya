@@ -6,34 +6,41 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
 import baseURL from "../../../../utils/baseURL";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { makeStyles } from '@material-ui/core/styles';
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
+import Snachbar from "../../../../components/snackbar/Snackbar";
 
-const useStyles = makeStyles((theme) => ({
-    backdrop: {
-        zIndex: theme.zIndex.drawer + 9999,
-        color: '#fff',
-    },
-}));
 
 function AdminDeleteInformation(props) {
 
-    const classes = useStyles();
-    const [openBackdrop, setOpenBackdrop] = React.useState(false);
+    // backdrop state
+    const [openbackdrop, setOpenbackdrop] = useState(false);
+
+    // alert state
+    const [open , setOpen] = useState(false) ;
+    const [message , setMessage] = useState('') ;
+    const [status , setStatus] = useState('success')
+
+    const handleSnackbarClose = () => {
+        setOpen(false) ;
+    } ;
 
     const handleDelete= () => {
-        setOpenBackdrop(true);
+        setOpenbackdrop(true);
         axios.delete(baseURL +"informations/" + props.data)
             .then(res => {
                 props.updateTable("delete" , props.data)
-                props.close()
-                setOpenBackdrop(false);
+                props.close();
+                setOpen(true) ;
+                setMessage( "Suppression effectué avec succès") ;
+                setStatus("success");
+                setOpenbackdrop(false);
             })
             .catch(err => {
-                console.log(err)
-                setOpenBackdrop(false);
+                console.log(err);
+                setOpen(true) ;
+                setMessage( "Erreur lors de la suppression") ;
+                setStatus("error");
+                setOpenbackdrop(false);
             })
     };
 
@@ -52,7 +59,8 @@ function AdminDeleteInformation(props) {
                         </Button>
                     </DialogActions>
                 </Dialog>
-                <MyBackdrop open={openBackdrop} />
+                <MyBackdrop open={openbackdrop} />
+                <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
             </div>
 
 }
