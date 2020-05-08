@@ -35,6 +35,11 @@ router.route('/')
     });
 
 router.route('/:Id')
+    .get((req, res, next) => {
+        res.statusCode = 403;
+        res.end('GET operation not supported on /informations/'+ req.params.Id);
+    })
+
     .post((req, res, next) => {
         res.statusCode = 403;
         res.end('POST operation not supported on /informations/'+ req.params.Id);

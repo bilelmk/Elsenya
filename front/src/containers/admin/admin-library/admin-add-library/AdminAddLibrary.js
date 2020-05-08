@@ -6,40 +6,27 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
-
-import Upload from "../../upload/Upload";
 import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
 
-function AdminAddRessource(props) {
-
-    const [title, setTitle] = useState('');
-    const [type, setType] = useState('');
-    const [content, setContent] = useState('');
-
-    const handleInput = (type ,file , valid) => {
-        if(valid){
-            setContent(file);
-            setType(type)
-        }
-    };
+function AdminAddLibrary(props) {
+    const [title, setTitle] = useState('' );
+    const [description, setDescription] = useState('');
 
     const handleAdd = () => {
-        const ressource = new FormData() ;
-        ressource.append('title' , title) ;
-        ressource.append('content' , content) ;
-        ressource.append('type' , type) ;
-        ressource.append('informationId' , props.data)
-        axios.post(baseURL + "information-resources" , ressource)
+        let library = {
+            title : title ,
+            description : description
+        };
+        axios.post(baseURL + "libraries" , library)
             .then(res => {
-                console.log(res);
                 props.close()
             })
             .catch(err => console.log(err))
     };
 
     return <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add Ressource</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add Information</DialogTitle>
         <DialogContent>
             <form  noValidate>
                 <Grid container spacing={2}>
@@ -58,9 +45,17 @@ function AdminAddRessource(props) {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Upload onInput={handleInput} type="video" />
-                        <Upload onInput={handleInput} type="image" />
-                        <Upload onInput={handleInput} type="pdf" />
+                        <TextField
+                            variant="outlined"
+                            required
+                            fullWidth
+                            name="description"
+                            label="Description"
+                            id="description"
+                            autoComplete="description"
+                            value={description}
+                            onChange={e => setDescription(e.target.value)}
+                        />
                     </Grid>
                 </Grid>
             </form>
@@ -76,4 +71,4 @@ function AdminAddRessource(props) {
     </Dialog>
 }
 
-export default AdminAddRessource ;
+export default AdminAddLibrary ;

@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../util/database");
-const Resource = require("./resource");
+const InformationResource = require("./information-resource");
 
 const Information = sequelize.define("information", {
   id: {
@@ -19,7 +19,7 @@ const Information = sequelize.define("information", {
   }
 });
 
-Information.hasMany(Resource);
-Resource.belongsTo(Information);
+Information.hasMany(InformationResource);
+InformationResource.belongsTo(Information);
 
 module.exports = Information;

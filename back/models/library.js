@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../util/database");
-const LibraryResource = require("./library-ressource");
+const LibraryResource = require("./library-resource");
 
 const Library = sequelize.define("library", {
     id: {

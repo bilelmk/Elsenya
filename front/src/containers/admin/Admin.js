@@ -1,5 +1,4 @@
 import React from "react";
-
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -8,13 +7,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import { Route } from "react-router-dom";
+import { Route, Switch ,Redirect} from "react-router-dom";
+import "./Admin.css";
 
 import AdminInformation from "./admin-information/AdminInformation";
 import AdminLibrary from "./admin-library/AdminLibrary";
 import AdminSideBar from "./admin-sidebar/AdminSideBar";
-
-import "./Admin.css";
+import AdminInformationRessource from "./admin-information/admin-information-ressource/AdminInformationRessource";
+import AdminLibraryRessource from "./admin-library/admin-library-ressource/AdminLibraryRessource" ;
 
 const drawerWidth = 300;
 
@@ -111,14 +111,21 @@ function Admin() {
           </IconButton>
         </Toolbar>
       </AppBar>
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open
         })}
       >
         <div className={classes.drawerHeader} />
-        <Route path="/admin/admin-library" exact component={AdminLibrary} />
-        <Route path="/admin" exact component={AdminInformation} />
+        <Switch>
+          <Redirect exact from="/admin" to="/admin/information" />
+          <Route path="/admin/admin-library" exact component={AdminLibrary} />
+          <Route path="/admin/admin-library/:id" exact component={AdminLibraryRessource} />
+          <Route path="/admin/information" exact component={AdminInformation} />
+          <Route path="/admin/information/:id" exact component={AdminInformationRessource} />
+        </Switch>
+
       </main>
 
       <AdminSideBar handleDrawerClose={handleDrawerClose} open={open} />

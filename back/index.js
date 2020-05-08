@@ -5,7 +5,7 @@ const sequelize = require("./util/database");
 
 const informationRoutes = require("./routes/information");
 const userRoutes = require("./routes/user");
-const resourceRoutes = require("./routes/resource");
+const informationResourceRoutes = require("./routes/information-resource");
 const libraryRoutes = require("./routes/library");
 
 const app = express();
@@ -39,9 +39,9 @@ app.use("/data", express.static(path.join(__dirname, "data")));
 
 app.use("/users", userRoutes);
 app.use("/informations", informationRoutes);
-app.use("/resources", resourceRoutes);
+app.use("/information-resources", informationResourceRoutes);
 app.use("/libraries", libraryRoutes);
-// app.use("/resources", resourceRoutes);
+// app.use("/library-resources", resourceRoutes);
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "react app", "index.html"));

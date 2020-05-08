@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize') ;
 const sequelize = require('../util/database') ;
 
-const LibraryResource = sequelize.define('library-ressource' , {
+const LibraryResource = sequelize.define('library-resource' , {
     id : {
         type : Sequelize.INTEGER ,
         autoIncrement : true ,

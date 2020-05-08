@@ -1,9 +1,12 @@
 const express = require("express");
-const Resource = require("../models/resource");
-const router = express.Router();
 const multer = require('multer') ;
-const MIME_TYPE_MAP = require('../util/mime-type') ;
 const uuid = require('uuid/v1') ;
+const fs = require('fs') ;
+
+const MIME_TYPE_MAP = require('../util/mime-type') ;
+const InformationResource = require("../models/information-resource");
+
+const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -26,7 +29,7 @@ const storage = multer.diskStorage({
 
 router.route("/")
   .get((req, res, next) => {
-    Resource.findAll()
+    InformationResource.findAll()
       .then(
         resources => {
           res.statusCode = 200;
@@ -40,7 +43,7 @@ router.route("/")
 
   .post(multer({ storage: storage }).single("content") ,(req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
-    Resource.create({
+    InformationResource.create({
       title: req.body.title,
       content:  url + "/data/" + req.file.filename ,
       type: req.body.type ,
@@ -59,17 +62,18 @@ router.route("/")
 
   .put((req, res, next) => {
     res.statusCode = 403;
-    res.end("PUT operation not supported on /resources");
+    res.end("PUT operation not supported on /information-resources");
   })
 
   .delete((req, res, next) => {
     res.statusCode = 403;
-    res.end("DELETE operation not supported on /resources");
+    res.end("DELETE operation not supported on /information-resources");
   });
 
 router.route('/:Id')
+    // Get by information id
     .get((req, res, next) => {
-        Resource.findAll({ where : { informationId : req.params.Id }})
+        InformationResource.findAll({ where : { informationId : req.params.Id }})
             .then(
                 resources => {
                     res.statusCode = 200;
@@ -79,6 +83,38 @@ router.route('/:Id')
                 err => next(err)
             )
             .catch(err => next(err));
+    })
+
+    .post((req, res, next) => {
+        res.statusCode = 403;
+        res.end("POST operation not supported on /information-resources/" + req.params.Id);
+    })
+
+    // Update
+    .put((req, res, next) => {
+        InformationResource.update(
+            req.body, { where : { id : req.params.Id }})
+            .then((resource) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(resource);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+    })
+
+    // Delete information by id
+    .delete((req, res, next) => {
+        InformationResource.destroy({ where: { id : req.params.Id }})
+            .then((resp) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(resp);
+            }, (err) => next(err))
+            .catch((err) => next(err));
+
+        fs.unlink(req.body.content.replace("http://localhost:3001/",""), err => {
+            console.log(err)
+        });
     });
 
 module.exports = router;

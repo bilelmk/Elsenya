@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize') ;
 const sequelize = require('../util/database') ;
 
-const Resource = sequelize.define('resource' , {
+const InformationResource = sequelize.define('information-resource' , {
     id : {
         type : Sequelize.INTEGER ,
         autoIncrement : true ,
@@ -22,4 +22,4 @@ const Resource = sequelize.define('resource' , {
     },
 });
 
-module.exports = Resource ;
+module.exports = InformationResource ;

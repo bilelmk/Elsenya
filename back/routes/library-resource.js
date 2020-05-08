@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require('multer') ;
 const MIME_TYPE_MAP = require('../util/mime-type') ;
-const LibraryRessource = require("../models/library-ressource");
+const LibraryResource = require("../models/library-resource");
 const uuid = require('uuid/v1') ;
 
 const storage = multer.diskStorage({
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 
 router.route("/")
     .get((req, res, next) => {
-        LibraryRessource.findAll()
+        LibraryResource.findAll()
             .then(
                 resources => {
                     res.statusCode = 200;
