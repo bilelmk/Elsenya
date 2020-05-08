@@ -1,4 +1,4 @@
-import React, {useState} from 'react' ;
+import React, {useEffect, useState} from 'react' ;
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -13,6 +13,8 @@ import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
 
 function AdminAddInformation(props) {
 
+
+
     // information state
     const [title, setTitle] = useState('' );
     const [description, setDescription] = useState('');
@@ -24,6 +26,11 @@ function AdminAddInformation(props) {
     const [open , setOpen] = useState(false) ;
     const [message , setMessage] = useState('') ;
     const [status , setStatus] = useState('success') ;
+
+    useEffect(() => {
+        setTitle( '') ;
+        setDescription( '' ) ;
+    } , [props]);
 
     const handleSnackbarClose = () => {
         setOpen(false) ;
