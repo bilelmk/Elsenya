@@ -1,4 +1,4 @@
-import React, {useState} from 'react' ;
+import React, {useState , useEffect } from 'react' ;
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,19 +22,24 @@ function AdminUpdateInformation(props) {
     const [status , setStatus] = useState('success');
 
     // information state
-    const [title, setTitle] = useState( null );
-    const [description, setDescription] = useState( null);
+    const [title, setTitle] = useState( '' );
+    const [description, setDescription] = useState(  '');
 
     const handleSnackbarClose = () => {
         setOpen(false) ;
     } ;
 
+    useEffect(() => {
+        setTitle(props.data  ? props.data.title : '') ;
+        setDescription(props.data ? props.data.description : '' ) ;
+    } , [props.data]);
+
     const handleUpdate= () => {
         setOpenbackdrop(true);
         let information = {
             id : props.data.id ,
-            title : title !== null ? title : props.data.title ,
-            description : description !== null ? description : props.data.description ,
+            title : title  ,
+            description : description ,
         };
         axios.put(baseURL + "informations" , information)
             .then(res => {
@@ -54,7 +59,6 @@ function AdminUpdateInformation(props) {
             })
     };
 
-
     return  <div>
                 <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">Update Information</DialogTitle>
@@ -71,7 +75,7 @@ function AdminUpdateInformation(props) {
                                         name="title"
                                         autoComplete="title"
                                         autoFocus
-                                        value={title !== null ? title : props.data ? props.data.title : ''}
+                                        value={title}
                                         onChange={e => setTitle(e.target.value)}
                                     />
                                 </Grid>
@@ -84,7 +88,7 @@ function AdminUpdateInformation(props) {
                                         label="Description"
                                         id="description"
                                         autoComplete="description"
-                                        value={description !== null ? description : props.data ? props.data.description : ''}
+                                        value={ description }
                                         onChange={e => setDescription(e.target.value)}
                                     />
                                 </Grid>
@@ -102,6 +106,7 @@ function AdminUpdateInformation(props) {
                 </Dialog>
                 <MyBackdrop open={openbackdrop} />
                 <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
+
             </div>
 }
 
