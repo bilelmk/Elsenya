@@ -7,12 +7,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
-import baseURL from "../../../../utils/baseURL";
+import baseURL from "../../../../../utils/baseURL";
 import {makeStyles} from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
 import Backdrop from "@material-ui/core/Backdrop/Backdrop";
-import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
-import Snachbar from "../../../../components/snackbar/Snackbar";
+import MyBackdrop from "../../../../../components/backdrop/MyBackdrop";
+import Snachbar from "../../../../../components/snackbar/Snackbar";
+import Upload from "../../../upload/Upload";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,49 +23,66 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function AdminUpdateLibrary(props) {
+function AdminUpdateLibraryResource(props) {
     const classes = useStyles();
-    const [title, setTitle] = useState(null);
     const [description, setDescription] = useState(null);
 
-
+    const [title, setTitle] = useState(null);
+    const [type, setType] = useState(null);
+    const [content, setContent] = useState(null);
 
 
     // alert state
-    const [open , setOpen] = useState(false) ;
-    const [message , setMessage] = useState('') ;
-    const [status , setStatus] = useState('success');
+    const [open, setOpen] = useState(false);
+    const [message, setMessage] = useState('');
+    const [status, setStatus] = useState('success');
 
     // backdrop state
     const [openbackdrop, setOpenbackdrop] = useState(false);
 
     const handleSnackbarClose = () => {
-        setOpen(false) ;
-    } ;
+        setOpen(false);
+    };
     const handleUpdate = () => {
+        const ressource = new FormData();
+        ressource.append('id', props.data ? props.data.id : 0);
+
+        ressource.append('title', title !== null ? title : props.data ? props.data.title : '');
+        ressource.append('content', content !== null ? content : props.data ? props.data.content : '');
+        ressource.append('type', type == null ? props.data.type : type);
+        ressource.append('libraryId', props.data.libraryId)
         setOpenbackdrop(true);
-        let library = {
+        const resource = {
             id: props.data.id,
-            title: title !== null ? title : props.data.title,
-            description: description !== null ? description : props.data.description,
-        };
-        axios.put(baseURL + "libraries", library)
+            title: title == null ? props.data.title : title,
+            type: type == null ? props.data.type : type,
+            content: content == null ? props.data.content : content
+
+        }
+        axios.put(baseURL + "library-resources", ressource)
             .then(res => {
-                props.updateTable("update" , library);
+                props.updateTable("update", resource);
                 props.close();
-                setOpen(true) ;
-                setMessage( "Modification effectué avec succès") ;
+                setOpen(true);
+                setMessage("Modification effectué avec succès");
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
-                setOpen(true) ;
-                setMessage( "Erreur lors de la modification") ;
+                setOpen(true);
+                setMessage("Erreur lors de la modification");
                 setStatus("error");
                 setOpenbackdrop(false);
             })
     };
+    const handleInput = (type, file, valid) => {
+        if (valid) {
+            setContent(file);
+            setType(type)
+        }
+    };
+
 
     return <div>
         <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
@@ -95,9 +113,14 @@ function AdminUpdateLibrary(props) {
                                 label="Description"
                                 id="description"
                                 autoComplete="description"
-                                value={description !== null ? description : props.data ? props.data.description : ''}
+                                value={type !== null ? type : props.data ? props.data.type : ''}
                                 onChange={e => setDescription(e.target.value)}
                             />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Upload onInput={handleInput} type="video"/>
+                            <Upload onInput={handleInput} type="image"/>
+                            <Upload onInput={handleInput} type="pdf"/>
                         </Grid>
                     </Grid>
                 </form>
@@ -112,10 +135,10 @@ function AdminUpdateLibrary(props) {
             </DialogActions>
         </Dialog>
         <MyBackdrop open={openbackdrop}/>
-        <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
+        <Snachbar message={message} open={open} status={status} close={handleSnackbarClose}/>
 
     </div>
 
 }
 
-export default AdminUpdateLibrary;
+export default AdminUpdateLibraryResource;

@@ -6,7 +6,7 @@ import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
 import Header from "../header/Header";
-import SideBar from "../sidebar/SideBar";
+import SideBar from "../sideBar/SideBar";
 import Resources from "../resources/resources";
 
 

@@ -28,7 +28,7 @@ export class Resources extends Component {
     componentDidMount() {
         let id=this.props.match.params.id
         axios
-            .get(baseURL + `resources/${id}`)
+            .get(baseURL + `information-resources/${id}`)
             .then(res => {
                 console.log(res.data);
                 this.setState({
@@ -45,7 +45,7 @@ export class Resources extends Component {
 
             <div>
                 <h1>Les resources de l'information {this.props.match.params.id}</h1>
-              {this.state.resources.map(resource => (
+              {this.state.resources.length>0 && this.state.resources.map(resource => (
                 <div>
                   <p>{resource.title}</p>
                   {this.state.isDataExist ? (

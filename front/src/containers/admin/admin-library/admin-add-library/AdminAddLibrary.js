@@ -8,10 +8,24 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
+import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
+import Snachbar from "../../../../components/snackbar/Snackbar";
 
 function AdminAddLibrary(props) {
     const [title, setTitle] = useState('' );
     const [description, setDescription] = useState('');
+
+    // backdrop state
+    const [openbackdrop, setOpenbackdrop] = useState(false);
+
+    // alert state
+    const [open , setOpen] = useState(false) ;
+    const [message , setMessage] = useState('') ;
+    const [status , setStatus] = useState('success') ;
+
+    const handleSnackbarClose = () => {
+        setOpen(false) ;
+    } ;
 
     const handleAdd = () => {
         let library = {
@@ -20,12 +34,23 @@ function AdminAddLibrary(props) {
         };
         axios.post(baseURL + "libraries" , library)
             .then(res => {
-                props.close()
+                props.updateTable("add" , res.data);
+                props.close();
+                setOpen(true) ;
+                setMessage( "Ajout effectué avec succès") ;
+                setStatus("success");
+                setOpenbackdrop(false);
             })
-            .catch(err => console.log(err))
-    };
+            .catch(err => {
+                console.log(err);
+                setOpen(true) ;
+                setMessage( "Erreur lors de l'ajout") ;
+                setStatus("error");
+                setOpenbackdrop(false);
+    })};
 
-    return <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
+    return( <div>
+    <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add Information</DialogTitle>
         <DialogContent>
             <form  noValidate>
@@ -69,6 +94,9 @@ function AdminAddLibrary(props) {
             </Button>
         </DialogActions>
     </Dialog>
+        <MyBackdrop open={openbackdrop} />
+        <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
+        </div>)
 }
 
 export default AdminAddLibrary ;
