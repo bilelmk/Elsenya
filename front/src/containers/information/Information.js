@@ -1,43 +1,76 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import axios from "axios";
-import {withStyles} from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import {Link, withRouter} from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 import baseURL from "../../utils/baseURL";
+import uuid from 'react-uuid'
+import "./Information.scss"
+import { Resources } from "../resources/resources";
+import Collapse from '@material-ui/core/Collapse';
+import Fab from '@material-ui/core/Fab';
+import { KeyboardArrowDown , ImageOutlined , VideocamOutlined , PictureAsPdfOutlined } from '@material-ui/icons';
+import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = (theme) => ({
-        root: {
-            width: '80%',
-        },
-        heading: {
-            fontSize: theme.typography.pxToRem(30),
-            fontWeight: theme.typography.fontWeightRegular,
-        },
-        element: {
-            margin: '10px'
-        }
-    })
-;
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        maxWidth: 360,
+        backgroundColor: "#eeeeee",
+    },
+}));
 
 export class Information extends Component {
     state = {
         informations: [],
-        isDataExist: false
+        isDataExist: false ,
+        information_resources : null ,
+        open : [] ,
     };
+
+
+    handleClick = (information_id) => {
+        this.state.open.map(open => {
+            if(open.id === information_id) {
+                open.status = open.status === false;
+
+            }
+        });
+        this.setState({});
+    };
+
+    changeContent(resource){
+        this.setState({
+            information_resources : resource ,
+        })
+    }
+
+    isOpen(id){
+        return this.state.open[this.state.open.findIndex(open => { return open.id === id})].status
+    }
 
     componentDidMount() {
         axios
             .get(baseURL + "informations")
             .then(res => {
-                console.log(res.data);
-                this.setState({
-                    informations: res.data,
-                    isDataExist: true
+                let open = [] ;
+                res.data.map((information) => {
+                    open.push({
+                        id : information.id ,
+                        status : false
+                    })
                 });
+                this.setState({
+                    information_resources : res.data[0] ? res.data[0].InformationResources[0] : null ,
+                    informations: res.data,
+                    isDataExist: true ,
+                    open : open
+                });
+
             })
             .catch(err => console.log(err));
     }
@@ -45,27 +78,51 @@ export class Information extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className={classes.root}>
-                <h1>Les informations</h1>
-                {this.state.informations.map(information => (
-                    <ExpansionPanel className={classes.element}>
-                        <ExpansionPanelSummary
-                            expandIcon={<ExpandMoreIcon/>}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography className={classes.heading}>{information.title}</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            <Typography>
-                                {this.props.match.params.id}
-                                {information.description}
-                                <br/>
-                                <Link to={`/home/resources/${information.id}`}>Voir ressources</Link>
-                            </Typography>
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
-                ))}
+            <div className={"inf-container"} >
+
+                <div className={"content"} >
+                    <Resources  resource={this.state.information_resources}/>
+                </div>
+
+                <div  className={"liste"} >
+                    <Paper style={{ height:'85vh' , overflow: 'auto' ,backgroundColor: "#222831"}}  elevation={3}>
+                        <List className={classes.root}>
+                            {this.state.informations.map(information => {
+                                return (
+                                <div key={uuid()}>
+                                    <div className={"information"}>
+                                        <div >
+                                            <p className={"title"}>
+                                                <Fab onClick={this.handleClick.bind(this, information.id)} size="small"
+                                                     style={{marginRight : "20px" , backgroundColor :"#00adb5" , color : "#eee"}}>
+                                                    <KeyboardArrowDown />
+                                                </Fab>
+                                                {information.title}
+                                            </p>
+                                            <p className={"description"}>{information.description}</p>
+
+                                        </div>
+                                        <Collapse className={"information-resource"} in={this.isOpen(information.id)} timeout="auto" unmountOnExit>
+                                            {information.InformationResources.map((resource) => (
+                                                <div key={uuid()} >
+                                                    <p onClick={this.changeContent.bind(this , resource)} >
+                                                        <IconButton aria-label="delete"  size="large">
+                                                            {resource.type === "image" ? <ImageOutlined style={{ color : "#eee"}}/> :
+                                                            resource.type === "video" ? < VideocamOutlined style={{ color : "#eee"}} />  :
+                                                            <PictureAsPdfOutlined style={{ color : "#eee"}} /> }
+                                                        </IconButton>
+                                                        {resource.title}
+                                                    </p>
+                                                </div>
+                                                )
+                                            )}
+                                        </Collapse>
+                                    </div>
+                                </div>
+                            )})}
+                        </List>
+                    </Paper>
+                </div>
             </div>
         );
     }

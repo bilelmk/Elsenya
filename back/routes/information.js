@@ -5,7 +5,7 @@ const router = express.Router() ;
 
 router.route('/')
     .get( (req, res, next) => {
-        Information.findAll()
+        Information.findAll({ include: ["InformationResources"] })
             .then(informations => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');

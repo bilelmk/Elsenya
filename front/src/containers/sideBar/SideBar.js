@@ -2,7 +2,8 @@ import React from "react";
 
 import Button from "@material-ui/core/Button";
 
-import { NavLink, Route, Switch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { KeyboardArrowDown , ImageOutlined , VideocamOutlined , PictureAsPdfOutlined } from '@material-ui/icons';
 
 import "./SideBar.css";
 
@@ -11,10 +12,13 @@ import "./SideBar.css";
 function SideBar() {
 
   return (
-    <>
-      <div className="large-vertical-menu"></div>
-
       <div className="vertical-menu">
+        <NavLink className="NavLink" to="/" exact>
+
+           <Button className="vertical-menu-btn">
+               <KeyboardArrowDown/>
+               الإستقبال</Button>
+        </NavLink>
         <NavLink className="NavLink" to="/home" exact>
           <Button className="vertical-menu-btn">الخريطة</Button>
         </NavLink>
@@ -25,7 +29,6 @@ function SideBar() {
           <Button className="vertical-menu-btn">المكتبة</Button>
         </NavLink>
       </div>
-    </>
   );
 }
 export default SideBar;

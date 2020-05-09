@@ -19,7 +19,7 @@ const Information = sequelize.define("information", {
   }
 });
 
-Information.hasMany(InformationResource);
+Information.hasMany(InformationResource , { as: "InformationResources" });
 InformationResource.belongsTo(Information);
 
 module.exports = Information;
