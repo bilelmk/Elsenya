@@ -52,7 +52,6 @@ function AdminAddInformation(props) {
                 setOpenbackdrop(false);
             })
             .catch(err => {
-                console.log(err);
                 setOpen(true) ;
                 setMessage( "Erreur lors de l'ajout") ;
                 setStatus("error");

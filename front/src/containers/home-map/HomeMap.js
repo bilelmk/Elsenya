@@ -61,7 +61,7 @@ class HomeMap extends Component {
                     </Map>
                     <div >
                         <Paper className={"stat"} elevation={3}>
-                            <img style={{width : "100px"}} src="./../../assets/img/hero.jpg"  alt="no image"/>
+                            <img src="/assets/logo.png" alt="no image"/>
                             <div>
                                 <p className={"question"}>قداش من تونسي يحب يرد لبلاد الكل سانية ؟</p>
                                 {this.state.stat.map(stat => (

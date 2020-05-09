@@ -21,12 +21,21 @@
 
   .question {
     font-weight: bold;
-    font-size: 110%;
+    font-size: 100%;
+    padding: 0 10px;
   }
 
   .governorate {
+    font-size: 90%;
     display: inline-block;
-    width: 50%;
+    width: 30%;
+    padding: 0 5px;
+  }
+
+  img {
+    width: 40%;
+    padding: 10% 30%;
+
   }
 
   p {
@@ -55,6 +64,4 @@
   }
 }
 
-.img {
-  width: 100px;
-}
+

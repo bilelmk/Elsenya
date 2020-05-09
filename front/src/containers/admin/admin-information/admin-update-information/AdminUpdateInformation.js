@@ -106,7 +106,6 @@ function AdminUpdateInformation(props) {
                 </Dialog>
                 <MyBackdrop open={openbackdrop} />
                 <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
-
             </div>
 }
 

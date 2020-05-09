@@ -103,7 +103,6 @@ router.get("/stat", (req, res, next) => {
                     stats.map( stat => {
                         if(user.governorate === stat.governorate){
                             stat.number ++
-                            console.log("ici")
                         }
                     })
                 });
