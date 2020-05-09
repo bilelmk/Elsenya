@@ -7,6 +7,7 @@ const informationRoutes = require("./routes/information");
 const userRoutes = require("./routes/user");
 const informationResourceRoutes = require("./routes/information-resource");
 const libraryRoutes = require("./routes/library");
+const libraryResourceRoutes = require("./routes/library-resource");
 
 const app = express();
 
@@ -41,7 +42,7 @@ app.use("/users", userRoutes);
 app.use("/informations", informationRoutes);
 app.use("/information-resources", informationResourceRoutes);
 app.use("/libraries", libraryRoutes);
-// app.use("/library-resources", resourceRoutes);
+ app.use("/library-resources", libraryResourceRoutes);
 
 app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "react app", "index.html"));

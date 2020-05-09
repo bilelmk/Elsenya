@@ -17,6 +17,10 @@ const User = sequelize.define('user' , {
             type : Sequelize.STRING ,
             allowNull : false ,
     },
+    governorate : {
+        type : Sequelize.STRING ,
+        allowNull : false ,
+    },
     firstname : {
         type : Sequelize.STRING ,
         allowNull : false ,

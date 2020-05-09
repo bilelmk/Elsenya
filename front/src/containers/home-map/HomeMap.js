@@ -10,12 +10,19 @@ class HomeMap extends Component {
     componentDidMount() {
         axios.get(baseURL + "users")
             .then(res =>this.setState( {users : res.data}))
+            .catch(err => console.log(err));
+        axios.get(baseURL + "users/stat")
+            .then(res => {
+                this.setState({stat : res.data.stats, userNumber : res.data.number})
+            })
             .catch(err => console.log(err))
     }
 
     state = {
         users : [] ,
-        activeUser : null
+        activeUser : null ,
+        stat : [] ,
+        userNumber : null
     };
 
     render (){
@@ -52,8 +59,25 @@ class HomeMap extends Component {
                             </Popup>
                         )}
                     </Map>
-                    <div>
-                        <Paper style={{ height:'85vh' , overflow: 'auto' }}  elevation={3}>
+                    <div >
+                        <Paper className={"stat"} elevation={3}>
+                            <img style={{width : "100px"}} src="./../../assets/img/hero.jpg"  alt="no image"/>
+                            <div>
+                                <p className={"question"}>قداش من تونسي يحب يرد لبلاد الكل سانية ؟</p>
+                                {this.state.stat.map(stat => (
+                                        <p className={"governorate"} >{stat.governorate} : {stat.number}</p>
+                                    )
+                                )}
+                            </div>
+                            <div className={"number"}>
+                                <div >
+
+                                </div>
+                                <div >
+                                    <p> : عدد المشاركين </p>
+                                    <p>{this.state.userNumber}</p>
+                                </div>
+                            </div>
                         </Paper>
                     </div>
                 </div>

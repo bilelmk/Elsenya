@@ -85,7 +85,7 @@ export class Information extends Component {
                 </div>
 
                 <div  className={"liste"} >
-                    <Paper style={{ height:'85vh' , overflow: 'auto' ,backgroundColor: "#222831"}}  elevation={3}>
+                    <Paper style={{ height:'92vh' , overflow: 'auto' ,backgroundColor: "#222831"}}  elevation={3}>
                         <List className={classes.root}>
                             {this.state.informations.map(information => {
                                 return (

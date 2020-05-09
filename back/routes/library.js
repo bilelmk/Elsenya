@@ -25,8 +25,14 @@ router.route('/')
     })
 
     .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end('PUT operation not supported on /libraries');
+        Library.update(
+            req.body, { where : { id : req.body.id }})
+            .then((library) => {
+                res.statusCode = 200;
+                res.setHeader('Content-Type', 'application/json');
+                res.json(library);
+            }, (err) => next(err))
+            .catch((err) => next(err));
     })
 
     .delete((req, res, next) => {
