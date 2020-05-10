@@ -14,10 +14,7 @@ function SideBar() {
   return (
       <div className="vertical-menu">
         <NavLink className="NavLink" to="/" exact>
-
-           <Button className="vertical-menu-btn">
-               <KeyboardArrowDown/>
-               الإستقبال</Button>
+           <Button className="vertical-menu-btn">الإستقبال</Button>
         </NavLink>
         <NavLink className="NavLink" to="/home" exact>
           <Button className="vertical-menu-btn">الخريطة</Button>
@@ -27,6 +24,9 @@ function SideBar() {
         </NavLink>
         <NavLink className="NavLink" to="/home/library">
           <Button className="vertical-menu-btn">المكتبة</Button>
+        </NavLink>
+        <NavLink className="NavLink" to="/home/signup">
+          <Button className="vertical-menu-btn">التسجيل</Button>
         </NavLink>
       </div>
   );

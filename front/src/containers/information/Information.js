@@ -94,7 +94,7 @@ export class Information extends Component {
                                         <div >
                                             <p className={"title"}>
                                                 <Fab onClick={this.handleClick.bind(this, information.id)} size="small"
-                                                     style={{marginRight : "20px" , backgroundColor :"#00adb5" , color : "#eee"}}>
+                                                     style={{marginRight : "20px" , backgroundColor :"#93deff" , color : "#323643"}}>
                                                     <KeyboardArrowDown />
                                                 </Fab>
                                                 {information.title}

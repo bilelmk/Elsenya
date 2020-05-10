@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState ,  useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-import { NavLink } from "react-router-dom";
 import axios from "axios";
 import baseURL from "../../utils/baseURL";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { Map , Marker , Popup , TileLayer} from "react-leaflet";
+
 
 function Copyright() {
   return (
@@ -29,7 +32,6 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
@@ -57,18 +59,28 @@ export default function SignUp() {
   const [place, setPlace] = useState("");
   const [comment, setComment] = useState("");
   const [agriculture, setAgriculture] = useState("");
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+  const [latitude, setLatitude] = useState(33.979809);
+  const [longitude, setLongitude] = useState(9.435263);
+  const [governorate, setGovernorate] = useState("");
 
-  useEffect(() => {});
+  const governorates = ["أريانة","باجة","بنزرت","بن عروس","تطاوين","تونس","جندوبة","توزر", "سليانة","زغوان","سوسة","صفاقس","سيدي بوزيد",
+    "قبلي","قابس","القصرين","المنستير","قفصة","القيروان","المهدية","الكاف","نابل","مدنين" , "منوبة"] ;
+
+
+  // useEffect(() => {
+  //   let map = document.getElementById("map") ;
+  //   map.addEventListener("click", (e) => { console.log(e)});
+  //   } , []);
+
+  const setMarker = (e) => {
+    setLatitude(e.latlng.lat);
+    setLongitude(e.latlng.lng);
+  };
+
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    navigator.geolocation.getCurrentPosition(position => {
-      console.log(position.coords);
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
       var user = {
         email: email,
         password: password,
@@ -79,155 +91,192 @@ export default function SignUp() {
         longitude: longitude,
         latitude: latitude,
         comment: comment,
-        agriculture: agriculture
+        agriculture: agriculture ,
+        governorate : governorate
       };
       axios
         .post(baseURL  + "users/signup", user)
-        .then(res => console.log(res));
-    });
+        .then(res => console.log(res))
+
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                value={firstName}
-                onChange={e => setFirstName(e.target.value)}
-                autoFocus
+      <Grid container justify="center" alignItems="center" style={{width : "100%" , height : "100vh"}}>
+        <Grid item xs={12} sm={4} >
+            <Map id="map" style={{width : "100%" , height : "85vh"}} center={[33.979809 , 9.435263]} zoom={7}   onClick={e => setMarker(e)}>
+              <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-                value={lastName}
-                onChange={e => setLastName(e.target.value)}
+              <Marker
+                  position={[latitude , longitude]}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="userName"
-                label="User Name"
-                name="userName"
-                autoComplete="Uname"
-                value={userName}
-                onChange={e => setUserName(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="comment"
-                label="Comment"
-                type="text"
-                id="comment"
-                autoComplete="Comment"
-                value={comment}
-                onChange={e => setComment(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="agriculture"
-                label="Agriculture"
-                type="text"
-                id="agriculture"
-                autoComplete="Agriculture"
-                value={agriculture}
-                onChange={e => setAgriculture(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="place"
-                label="Place"
-                type="text"
-                id="place"
-                autoComplete="Place"
-                value={place}
-                onChange={e => setPlace(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={handleSubmit}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <NavLink to="/sign-in" variant="body2">
-                Already have an account? Sign in
-              </NavLink>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-    </Container>
+            </Map>
+        </Grid>
+        <Grid item xs={12} sm={1} >
+
+        </Grid>
+
+        <Grid item xs={12} sm={4} >
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar} style={{backgroundColor : "blue"}}>
+              <LockOutlinedIcon  />
+            </Avatar>
+            <form className={classes.form} noValidate>
+              <Grid container spacing={2}>
+                <Grid item xs={12} >
+                  <TextField
+                      dir="rtl"
+                      autoComplete="fname"
+                      name="firstName"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="firstName"
+                      label="الاسم"
+                      value={firstName}
+                      onChange={e => setFirstName(e.target.value)}
+                      autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="lastName"
+                      label="اللقب"
+                      name="lastName"
+                      autoComplete="lname"
+                      value={lastName}
+                      onChange={e => setLastName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} >
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="userName"
+                      label="اسم المستخدم"
+                      name="userName"
+                      autoComplete="Uname"
+                      value={userName}
+                      onChange={e => setUserName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      id="email"
+                      label="عنوان البريد الإلكتروني"
+                      name="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="password"
+                      label="كلمة المرور"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl variant="outlined" style={{width : "100%"}}>
+                    <InputLabel id="governorate">الولاية</InputLabel>
+                    <Select
+                        labelId="governorate"
+                        id="governorate"
+                        value={governorate}
+                        onChange={e => setGovernorate(e.target.value)}
+                        label="Age"
+                    >{governorates.map( gv => {
+                      return <MenuItem key={gv} value={gv}>{gv}</MenuItem>
+                    })}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="place"
+                      label="المنطقة"
+                      type="text"
+                      id="place"
+                      autoComplete="Place"
+                      value={place}
+                      onChange={e => setPlace(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="agriculture"
+                      label="الزراعات"
+                      type="text"
+                      id="agriculture"
+                      autoComplete="Agriculture"
+                      value={agriculture}
+                      onChange={e => setAgriculture(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="comment"
+                      label="تعليق"
+                      type="text"
+                      id="comment"
+                      autoComplete="Comment"
+                      value={comment}
+                      onChange={e => setComment(e.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={handleSubmit}
+              >
+                Sign Up
+              </Button>
+              {/*<Grid container justify="flex-end">*/}
+              {/*  <Grid item>*/}
+              {/*    <NavLink to="/sign-in" variant="body2">*/}
+              {/*      Already have an account? Sign in*/}
+              {/*    </NavLink>*/}
+              {/*  </Grid>*/}
+              {/*</Grid>*/}
+            </form>
+          </div>
+        </Grid>
+      </Grid>
   );
 }

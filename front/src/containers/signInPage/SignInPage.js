@@ -16,7 +16,6 @@ import { NavLink} from "react-router-dom";
 import axios from "axios";
 import baseURL from "../../utils/baseURL";
 import jwt from "jsonwebtoken";
-import UserContext from "../../context/UserContext";
 
 function Copyright() {
   return (

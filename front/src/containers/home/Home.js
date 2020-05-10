@@ -5,10 +5,8 @@ import "./Home.scss";
 import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
-import Header from "../header/Header";
 import SideBar from "../sidebar/SideBar";
-import Resources from "../resources/resources";
-
+import SignUp from "../signUpPage/SignUpPage";
 
 function Home() {
     return (
@@ -20,6 +18,7 @@ function Home() {
                     <Route path="/home" exact component={HomeMap} />
                     <Route path="/home/library" exact component={Library} />
                     <Route path="/home/information" exact component={Information} />
+                    <Route path="/home/signup" exact component={SignUp} />
                     {/*<Route path="/home/resources/:id" exact component={Resources} />*/}
                 </Switch>
             </div>

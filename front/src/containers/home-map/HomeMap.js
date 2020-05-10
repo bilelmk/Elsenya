@@ -34,8 +34,7 @@ class HomeMap extends Component {
                         {this.state.users.map(user => (
                                 <Marker
                                     key={user.id}
-                                    position={[ user.longitude ,
-                                        user.latitude]}
+                                    position={[user.latitude , user.longitude  ]}
                                     onClick={() => {
                                         this.setState({activeUser : user});
                                     }}
@@ -45,16 +44,18 @@ class HomeMap extends Component {
                         {this.state.activeUser && (
                             <Popup
                                 position={[
-                                    this.state.activeUser.longitude,
-                                    this.state.activeUser.latitude
+                                    this.state.activeUser.latitude,
+                                    this.state.activeUser.longitude
                                 ]}
                                 onClose={() => {
                                     this.setState({activeUser : null});
                                 }}
                             >
-                                <div>
-                                    <h2>{this.state.activeUser.firstname}</h2>
-                                    <p>{this.state.activeUser.comment}</p>
+                                <div className={"popup"}>
+                                    <h1>{this.state.activeUser.firstname}</h1>
+                                    <h2 className={"message"}>{this.state.activeUser.comment} </h2>
+                                    <h2>{this.state.activeUser.governorate} {this.state.activeUser.place}</h2>
+                                    <h2>الزراعات : {this.state.activeUser.agriculture} </h2>
                                 </div>
                             </Popup>
                         )}
