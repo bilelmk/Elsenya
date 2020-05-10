@@ -5,7 +5,7 @@ const router = express.Router() ;
 
 router.route('/')
     .get( (req, res, next) => {
-        Library.findAll()
+        Library.findAll({ include: ["LibraryResources"] })
             .then(libraries => {
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');

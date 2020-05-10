@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export class Information extends Component {
+ class Information extends Component {
     state = {
         informations: [],
         isDataExist: false ,
@@ -106,7 +106,7 @@ export class Information extends Component {
                                             {information.InformationResources.map((resource) => (
                                                 <div key={uuid()} >
                                                     <p onClick={this.changeContent.bind(this , resource)} >
-                                                        <IconButton aria-label="delete"  size="large">
+                                                        <IconButton aria-label="delete"  size="medium">
                                                             {resource.type === "image" ? <ImageOutlined style={{ color : "#eee"}}/> :
                                                             resource.type === "video" ? < VideocamOutlined style={{ color : "#eee"}} />  :
                                                             <PictureAsPdfOutlined style={{ color : "#eee"}} /> }

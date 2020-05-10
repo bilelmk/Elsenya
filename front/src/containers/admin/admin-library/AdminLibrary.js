@@ -22,7 +22,7 @@ import AdminAddLibraryInformationRessource
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#00adb5",
         color: theme.palette.common.white,
     },
     body: {

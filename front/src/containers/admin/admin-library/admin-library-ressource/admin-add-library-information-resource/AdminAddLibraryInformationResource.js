@@ -48,7 +48,6 @@ function AdminAddLibraryInformationRessource(props) {
         ressource.append('libraryId', props.data)
         axios.post(baseURL + "library-resources", ressource)
             .then(res => {
-                props.updateTable("add", res.data);
                 props.close();
                 setOpen(true);
                 setMessage("Ajout effectué avec succès");
