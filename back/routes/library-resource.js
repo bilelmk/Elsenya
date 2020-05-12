@@ -5,6 +5,7 @@ const MIME_TYPE_MAP = require('../util/mime-type');
 const LibraryResource = require("../models/library-resource");
 const uuid = require('uuid/v1');
 const fs = require('fs') ;
+const auth = require('../util/auth');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -39,7 +40,7 @@ router.route("/")
             .catch(err => next(err));
     })
 
-    .post(multer({storage: storage}).single("content"), (req, res, next) => {
+    .post(auth,multer({storage: storage}).single("content"), (req, res, next) => {
         const url = req.protocol + "://" + req.get("host");
         LibraryResource.create({
             title: req.body.title,
@@ -58,7 +59,7 @@ router.route("/")
             .catch(err => next(err));
     })
 
-    .put(multer({storage: storage}).single("content"), (req, res, next) => {
+    .put(auth,multer({storage: storage}).single("content"), (req, res, next) => {
         const url = req.protocol + "://" + req.get("host");
         LibraryResource.update({
             title: req.body.title,
@@ -95,7 +96,7 @@ router.route('/:Id')
             )
             .catch(err => next(err));
     })
-    .delete((req, res, next) => {
+    .delete(auth,(req, res, next) => {
         LibraryResource.destroy({ where: { id : req.params.Id }})
             .then((resp) => {
                 res.statusCode = 200;

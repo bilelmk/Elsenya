@@ -1,6 +1,7 @@
 const express = require('express') ;
 const Library = require('../models/library');
 const router = express.Router() ;
+const auth = require('../util/auth');
 
 
 router.route('/')
@@ -14,7 +15,7 @@ router.route('/')
             .catch((err) => next(err));
     })
 
-    .post( (req, res, next) => {
+    .post( auth,(req, res, next) => {
         Library.create(req.body)
             .then((library) => {
                 res.statusCode = 200;
@@ -24,7 +25,7 @@ router.route('/')
             .catch((err) => next(err));
     })
 
-    .put((req, res, next) => {
+    .put(auth,(req, res, next) => {
         Library.update(
             req.body, { where : { id : req.body.id }})
             .then((library) => {
@@ -47,7 +48,7 @@ router.route('/:Id')
     })
 
     // Update library
-    .put((req, res, next) => {
+    .put(auth,(req, res, next) => {
         Library.update(
             req.body, { where : { id : req.params.Id }})
             .then((library) => {
@@ -59,7 +60,7 @@ router.route('/:Id')
     })
 
     // Delete library by id
-    .delete((req, res, next) => {
+    .delete(auth,(req, res, next) => {
         Library.destroy({ where: { id : req.params.Id }})
             .then((resp) => {
                 res.statusCode = 200;

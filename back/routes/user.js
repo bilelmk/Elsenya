@@ -35,11 +35,13 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
   let fetchedUser;
-  User.findOne({ email: req.body.email })
+    console.log(req.body.email)
+
+    User.findOne({where:{ email: req.body.email }})
     .then(user => {
       if (!user) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed, no such user"
         });
       }
       fetchedUser = user;
@@ -48,7 +50,7 @@ router.post("/login", (req, res, next) => {
     .then(result => {
       if (!result) {
         return res.status(401).json({
-          message: "Auth failed"
+          message: "Auth failed, wrong password"
         });
       }
       const token = jwt.sign(

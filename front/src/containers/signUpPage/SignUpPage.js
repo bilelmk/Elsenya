@@ -17,6 +17,7 @@ import Select from '@material-ui/core/Select';
 import { Map , Marker , Popup , TileLayer} from "react-leaflet";
 import MyBackdrop from "../../components/backdrop/MyBackdrop";
 import Snachbar from "../../components/snackbar/Snackbar";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 
 function Copyright() {
@@ -65,6 +66,9 @@ function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [repeatPassword, setRepeatPassword] = useState("");
+
   const [place, setPlace] = useState("");
   const [comment, setComment] = useState("");
   const [agriculture, setAgriculture] = useState("");
@@ -83,18 +87,29 @@ function SignUp() {
   const governorates = ["أريانة","باجة","بنزرت","بن عروس","تطاوين","تونس","جندوبة","توزر", "سليانة","زغوان","سوسة","صفاقس","سيدي بوزيد",
     "قبلي","قابس","القصرين","المنستير","قفصة","القيروان","المهدية","الكاف","نابل","مدنين" , "منوبة"] ;
 
+  useEffect(()=>{
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== password) {
+        return false;
+      }
+      return true;
+    });
+  })
+
   const setMarker = (e) => {
     setLatitude(e.latlng.lat);
     setLongitude(e.latlng.lng);
   };
+
 
   const handleSnackbarClose = () => {
     setOpen(false) ;
   } ;
 
   const handleSubmit = e => {
+    e.preventDefault();
+
     setOpenbackdrop(true);
-    // e.preventDefault();
 
       var user = {
         email: email,
@@ -147,10 +162,14 @@ function SignUp() {
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon  />
             </Avatar>
-            <form className={classes.form} noValidate>
+            <ValidatorForm
+
+                onSubmit={handleSubmit}
+                onError={errors => console.log(errors)}
+            >
               <Grid container spacing={2}>
                 <Grid item xs={12} >
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       autoComplete="fname"
                       name="firstName"
@@ -162,10 +181,12 @@ function SignUp() {
                       value={firstName}
                       onChange={e => setFirstName(e.target.value)}
                       autoFocus
+                      validators={['required','minStringLength:3','maxStringLength:21']}
+                      errorMessages={['this field is required','field is too short','field is too long']}
                   />
                 </Grid>
                 <Grid item xs={12} >
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -176,10 +197,12 @@ function SignUp() {
                       autoComplete="lname"
                       value={lastName}
                       onChange={e => setLastName(e.target.value)}
+                      validators={['required','minStringLength:3','maxStringLength:21']}
+                      errorMessages={['this field is required','field is too short','field is too long']}
                   />
                 </Grid>
                 <Grid item xs={12} >
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -190,10 +213,12 @@ function SignUp() {
                       autoComplete="Uname"
                       value={userName}
                       onChange={e => setUserName(e.target.value)}
+                      validators={['required','minStringLength:3','maxStringLength:21']}
+                      errorMessages={['this field is required','field is too short','field is too long']}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -204,10 +229,12 @@ function SignUp() {
                       autoComplete="email"
                       value={email}
                       onChange={e => setEmail(e.target.value)}
+                      validators={['required', 'isEmail']}
+                      errorMessages={['this field is required', 'email is not valid']}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -219,12 +246,32 @@ function SignUp() {
                       autoComplete="current-password"
                       value={password}
                       onChange={e => setPassword(e.target.value)}
+                      validators={['required','minStringLength:6','maxStringLength:31']}
+                      errorMessages={['this field is required','field is too short','field is too long']}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextValidator
+                      dir="rtl"
+                      variant="outlined"
+                      required
+                      fullWidth
+                      name="repeatPassword"
+                      label="إعادة كلمة المرور"
+                      type="password"
+                      id="repeatPassword"
+                      autoComplete="current-password"
+                      value={repeatPassword}
+                      onChange={e => setRepeatPassword(e.target.value)}
+                      validators={['isPasswordMatch', 'required']}
+                      errorMessages={['password mismatch', 'this field is required']}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl variant="outlined" style={{width : "100%"}}>
                     <InputLabel id="governorate">الولاية</InputLabel>
                     <Select
+                        required
                         labelId="governorate"
                         id="governorate"
                         value={governorate}
@@ -237,7 +284,7 @@ function SignUp() {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -249,10 +296,12 @@ function SignUp() {
                       autoComplete="Place"
                       value={place}
                       onChange={e => setPlace(e.target.value)}
+                      validators={['required']}
+                      errorMessages={['this field is required']}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -264,10 +313,12 @@ function SignUp() {
                       autoComplete="Agriculture"
                       value={agriculture}
                       onChange={e => setAgriculture(e.target.value)}
+                      validators={['required']}
+                      errorMessages={['this field is required']}
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <TextField
+                  <TextValidator
                       dir="rtl"
                       variant="outlined"
                       required
@@ -279,6 +330,8 @@ function SignUp() {
                       autoComplete="Comment"
                       value={comment}
                       onChange={e => setComment(e.target.value)}
+                      validators={['required']}
+                      errorMessages={['this field is required']}
                   />
                 </Grid>
               </Grid>
@@ -288,7 +341,6 @@ function SignUp() {
                   variant="contained"
                   color="primary"
                   className={classes.submit}
-                  onClick={handleSubmit}
               >
                 Sign Up
               </Button>
@@ -299,7 +351,7 @@ function SignUp() {
               {/*    </NavLink>*/}
               {/*  </Grid>*/}
               {/*</Grid>*/}
-            </form>
+            </ValidatorForm>
           </div>
         </Grid>
         <MyBackdrop open={openbackdrop} />

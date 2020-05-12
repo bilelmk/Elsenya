@@ -6,8 +6,9 @@ import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
 import SignUp from "../signUpPage/SignUpPage";
-import SideBar from "../sidebar/SideBar";
+import SideBar from "../sideBar/SideBar";
 import Welcome from "../welcome/Welcome";
+import SignIn from "../signInPage/SignInPage";
 
 
 function Home() {
@@ -22,6 +23,7 @@ function Home() {
                     <Route path="/home/library" exact component={Library} />
                     <Route path="/home/information" exact component={Information} />
                     <Route path="/home/signup" exact component={SignUp} />
+                    <Route path="/home/signin" exact component={SignIn} />
                     {/*<Route path="/home/resources/:id" exact component={Resources} />*/}
                 </Switch>
             </div>

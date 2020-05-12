@@ -15,7 +15,7 @@ import LibraryBooksOutlinedIcon from "@material-ui/icons/LibraryBooksOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
 
 
-import { Link } from "react-router-dom";
+import { Link ,useHistory} from "react-router-dom";
 
 import "../Admin.css";
 
@@ -81,6 +81,11 @@ const useStyles = makeStyles(theme => ({
 function AdminSideBar(props) {
   const classes = useStyles();
   const theme = useTheme();
+  const history = useHistory();
+  const logout=()=>{
+    localStorage.removeItem('jwToken');
+    history.push('/home')
+  }
   return (
       <Drawer
         className={classes.drawer}
@@ -128,7 +133,7 @@ function AdminSideBar(props) {
             <ListItemIcon>
               <ExitToAppOutlinedIcon />
             </ListItemIcon>
-            <ListItemText primary="تسجيل خروج" />
+            <ListItemText primary="تسجيل خروج" onClick={logout} />
           </ListItem>
         </List>
       </Drawer>

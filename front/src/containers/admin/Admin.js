@@ -15,6 +15,7 @@ import AdminLibrary from "./admin-library/AdminLibrary";
 import AdminSideBar from "./admin-sidebar/AdminSideBar";
 import AdminInformationRessource from "./admin-information/admin-information-ressource/AdminInformationRessource";
 import AdminLibraryRessource from "./admin-library/admin-library-ressource/AdminLibraryRessource" ;
+import PrivateRoute from "./PrivateRoute";
 
 const drawerWidth = 300;
 
@@ -120,10 +121,10 @@ function Admin() {
         <div className={classes.drawerHeader} />
         <Switch>
           <Redirect exact from="/admin" to="/admin/information" />
-          <Route path="/admin/admin-library" exact component={AdminLibrary} />
-          <Route path="/admin/admin-library/:id" exact component={AdminLibraryRessource} />
-          <Route path="/admin/information" exact component={AdminInformation} />
-          <Route path="/admin/information/:id" exact component={AdminInformationRessource} />
+          <PrivateRoute path="/admin/admin-library" exact component={AdminLibrary} />
+          <PrivateRoute path="/admin/admin-library/:id" exact component={AdminLibraryRessource} />
+          <PrivateRoute path="/admin/information" exact component={AdminInformation} />
+          <PrivateRoute path="/admin/information/:id" exact component={AdminInformationRessource} />
         </Switch>
 
       </main>

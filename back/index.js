@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const sequelize = require("./util/database");
 
+
 const informationRoutes = require("./routes/information");
 const userRoutes = require("./routes/user");
 const informationResourceRoutes = require("./routes/information-resource");
@@ -41,7 +42,7 @@ app.use("/data", express.static(path.join(__dirname, "data")));
 app.use("/users", userRoutes);
 app.use("/informations", informationRoutes);
 app.use("/information-resources", informationResourceRoutes);
-app.use("/libraries", libraryRoutes);
+app.use("/libraries" ,libraryRoutes);
  app.use("/library-resources", libraryResourceRoutes);
 
 app.use((req, res, next) => {

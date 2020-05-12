@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require('multer') ;
 const uuid = require('uuid/v1') ;
 const fs = require('fs') ;
+const auth = require('../util/auth');
 
 const MIME_TYPE_MAP = require('../util/mime-type') ;
 const InformationResource = require("../models/information-resource");
@@ -41,7 +42,7 @@ router.route("/")
       .catch(err => next(err));
   })
 
-  .post(multer({ storage: storage }).single("content") ,(req, res, next) => {
+  .post(auth,multer({ storage: storage }).single("content") ,(req, res, next) => {
     const url = req.protocol + "://" + req.get("host");
     InformationResource.create({
       title: req.body.title,
@@ -91,7 +92,7 @@ router.route('/:Id')
     })
 
     // Update
-    .put((req, res, next) => {
+    .put(auth,(req, res, next) => {
         InformationResource.update(
             req.body, { where : { id : req.params.Id }})
             .then((resource) => {
@@ -103,7 +104,7 @@ router.route('/:Id')
     })
 
     // Delete information by id
-    .delete((req, res, next) => {
+    .delete(auth,(req, res, next) => {
         InformationResource.destroy({ where: { id : req.params.Id }})
             .then((resp) => {
                 res.statusCode = 200;
