@@ -1,46 +1,9 @@
 import React, {Component} from 'react' ;
 import axios from "axios";
 import baseURL from "../../../../utils/baseURL";
-import Paper from "@material-ui/core/Paper/Paper";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
-import {withStyles} from "@material-ui/core";
-import TableCell from "@material-ui/core/TableCell/TableCell";
-import {makeStyles} from "@material-ui/core/styles";
-
 import AdminUpdateLibraryResource from './admin-update-library-resource/AdminUpdateLibraryResource';
 import AdminDeleteLibraryResource from './admin-delete-library-resource/AdminDeleteLibraryResource';
-import AdminAddLibrary from "../admin-add-library/AdminAddLibrary";
 import {DeleteOutline, Update} from "@material-ui/icons";
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        },
-    },
-}))(TableRow);
-
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
 
 class AdminLibraryRessource extends Component {
 
@@ -134,44 +97,36 @@ class AdminLibraryRessource extends Component {
 
             />
 
-            <TableContainer component={Paper}>
-                <Table className={useStyles.table} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell align="center">Actions</StyledTableCell>
-                            <StyledTableCell align="center">content</StyledTableCell>
-                            <StyledTableCell align="center">الوصف</StyledTableCell>
-                            <StyledTableCell align="center">العنوان</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.library_resources.map((information_resource) => (
-                            <StyledTableRow key={information_resource.id}>
-                                <StyledTableCell align="center">
-                                    <button className="btn" onClick={this.openUpdateDialog.bind(this, information_resource)}>
-                                        <Update className="icon"/>
+            <table>
+                <tr>
+                    <th>التغييرات</th>
+                    <th>المحتوى</th>
+                    <th>نوع المحتوى</th>
+                    <th>العنوان</th>
+                </tr>
+                {this.state.library_resources.map((information_resource) => (
+                    <tr key={information_resource.id}>
+                        <td>
+                            <button className="btn" onClick={this.openDeleteDialog.bind(this , information_resource)}>
+                                <DeleteOutline className="icon"/>
+                            </button>
 
-                                    </button>
-                                    <button className="btn" onClick={this.openDeleteDialog.bind(this, information_resource)}>
-                                        <DeleteOutline className="icon"/>
-
-                                    </button>
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {information_resource.content}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {information_resource.type}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {information_resource.title}
-                                </StyledTableCell>
-
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                            {/*<button className="btn" onClick={this.openDeleteDialog.bind(this , information_resource)}>*/}
+                            {/*    <Update className="icon"/>*/}
+                            {/*</button>*/}
+                        </td>
+                        <td>
+                            {information_resource.content}
+                        </td>
+                        <td>
+                            {information_resource.type}
+                        </td>
+                        <td>
+                            {information_resource.title}
+                        </td>
+                    </tr>
+                ))}
+            </table>
 
         </div>
     }

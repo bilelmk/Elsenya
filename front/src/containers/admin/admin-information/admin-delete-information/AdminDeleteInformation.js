@@ -8,6 +8,7 @@ import axios from "axios";
 import baseURL from "../../../../utils/baseURL";
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
 import Snachbar from "../../../../components/snackbar/Snackbar";
+import "../AdminInformation.scss"
 
 
 function AdminDeleteInformation(props) {
@@ -31,14 +32,14 @@ function AdminDeleteInformation(props) {
                 props.updateTable("delete" , props.data)
                 props.close();
                 setOpen(true) ;
-                setMessage( "Suppression effectué avec succès") ;
+                setMessage( "تم الحذف بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
                 setOpen(true) ;
-                setMessage( "Erreur lors de la suppression") ;
+                setMessage( "حدث خطأ أثناء الحذف") ;
                 setStatus("error");
                 setOpenbackdrop(false);
             })
@@ -46,16 +47,16 @@ function AdminDeleteInformation(props) {
 
     return <div>
                 <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Delete Information</DialogTitle>
+                    <DialogTitle id="form-dialog-title" className={"title"} >حذف المعلومات</DialogTitle>
                     <DialogContent>
 
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={props.close} color="primary">
-                            Cancel
+                        <Button onClick={props.close} className={"popup-btn"}>
+                            الغاء
                         </Button>
-                        <Button onClick={handleDelete} color="primary">
-                            Delete
+                        <Button onClick={handleDelete}  className={"popup-btn" }>
+                            حذف
                         </Button>
                     </DialogActions>
                 </Dialog>

@@ -1,50 +1,13 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import baseURL from "./../../../utils/baseURL";
-import {withStyles, makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
 import AdminAddLibrary from "./admin-add-library/AdminAddLibrary";
 import AdminUpdateLibrary from "./admin-update-library/AdminUpdateLibrary";
 import AdminDeleteLibrary from "./admin-delete-library/AdminDeleteLibrary";
-
 import {Add, DeleteOutline, Update, VideoCallOutlined, VideocamOutlined} from '@material-ui/icons';
 import './AdminLibrary.scss';
 import {Link} from "react-router-dom";
-import AdminAddLibraryInformationRessource
-    from "./admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource";
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        },
-    },
-}))(TableRow);
-
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
-
+import AdminAddLibraryInformationRessource from "./admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource";
 
 class AdminLibrary extends Component {
 
@@ -102,7 +65,6 @@ class AdminLibrary extends Component {
     componentDidMount() {
         axios.get(baseURL + "libraries")
             .then(res => {
-                console.log(res)
                 this.setState({libraries: res.data})
             })
             .catch(err => console.log(err))
@@ -154,46 +116,46 @@ class AdminLibrary extends Component {
                                                  updateTable={this.updateInformationTable.bind(this)}
             />
 
-            <TableContainer component={Paper}>
-                <Table className={useStyles.table} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell align="center">Actions</StyledTableCell>
-                            <StyledTableCell align="center">الوصف</StyledTableCell>
-                            <StyledTableCell align="center">العنوان</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.libraries.map((library) => (
-                            <StyledTableRow key={library.id}>
-                                <StyledTableCell align="center">
-                                    <button className="btn" onClick={this.openAddRessourcesDialog.bind(this, library.id)}>
-                                        <VideoCallOutlined className="icon"/>
-                                    </button>
-                                    <button className="btn" onClick={this.openUpdateDialog.bind(this, library)}>
-                                        <Update className="icon"/>
-                                    </button>
-                                    <button className="btn" onClick={this.openDeleteDialog.bind(this, library.id)}>
-                                        <DeleteOutline className="icon"/>
-                                    </button>
-                                    <button className="btn">
-                                        <Link className="link" to={`/admin/admin-library/${library.id}`}>
-                                            <VideocamOutlined className="icon"/>
-                                        </Link>
-                                    </button>
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {library.description}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {library.title}
-                                </StyledTableCell>
 
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+
+            <table>
+                <tr>
+                    <th>التغييرات</th>
+                    <th>الوصف</th>
+                    <th>العنوان</th>
+                </tr>
+                {this.state.libraries.map((library) => (
+                    <tr key={library.id}>
+                        <td>
+                            <button className="btn" onClick={this.openAddRessourcesDialog.bind(this, library.id)}>
+                                <VideoCallOutlined className="icon"/>
+                            </button>
+
+                            <button className="btn">
+                                <Link className="link" to={`/admin/admin-library/${library.id}`}>
+                                    <VideocamOutlined className="icon"/>
+                                </Link>
+                            </button>
+
+                            <button className="btn" onClick={this.openDeleteDialog.bind(this, library.id)}>
+                                <DeleteOutline className="icon"/>
+                            </button>
+
+                            <button className="btn" onClick={this.openUpdateDialog.bind(this, library)}>
+                                <Update className="icon"/>
+                            </button>
+                        </td>
+
+                        <td>
+                            {library.description}
+                        </td>
+                        <td>
+                            {library.title}
+                        </td>
+                    </tr>
+                ))}
+            </table>
+
         </div>
 
     }

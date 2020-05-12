@@ -1,4 +1,4 @@
-import React, {useState} from 'react' ;
+import React, {useEffect, useState} from 'react' ;
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -40,7 +40,13 @@ function AdminAddLibraryInformationRessource(props) {
         }
     };
 
+    useEffect(() => {
+        setTitle( '') ;
+    } , [props]);
+
     const handleAdd = () => {
+        setOpenbackdrop(true);
+
         const ressource = new FormData();
         ressource.append('title', title);
         ressource.append('content', content);
@@ -48,16 +54,15 @@ function AdminAddLibraryInformationRessource(props) {
         ressource.append('libraryId', props.data)
         axios.post(baseURL + "library-resources", ressource)
             .then(res => {
-                props.updateTable("add", res.data);
                 props.close();
                 setOpen(true);
-                setMessage("Ajout effectué avec succès");
+                setMessage( "تم الإضافة بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 setOpen(true);
-                setMessage("Erreur lors de l'ajout");
+                setMessage( "خطأ في الإضافة") ;
                 setStatus("error");
                 setOpenbackdrop(false);
             })
@@ -66,12 +71,14 @@ function AdminAddLibraryInformationRessource(props) {
     return(
     <div>
         <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Add Ressource</DialogTitle>
-            <DialogContent>
+            <DialogTitle id="form-dialog-title" className={"title"}>أضافة محتوى</DialogTitle>
+            <DialogContent className={"margin-top"}>
                 <form noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
+                                dir="rtl"
+
                                 variant="outlined"
                                 required
                                 fullWidth
@@ -84,20 +91,20 @@ function AdminAddLibraryInformationRessource(props) {
                                 onChange={e => setTitle(e.target.value)}
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <div>
                             <Upload onInput={handleInput} type="video"/>
                             <Upload onInput={handleInput} type="image"/>
                             <Upload onInput={handleInput} type="pdf"/>
-                        </Grid>
+                        </div>
                     </Grid>
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.close} color="primary">
-                    Cancel
+                <Button onClick={props.close} className={"popup-btn"}>
+                    الغاء
                 </Button>
-                <Button onClick={handleAdd} color="primary">
-                    Add
+                <Button onClick={handleAdd}  className={["popup-btn" , "margin-right"]}>
+                    اضافة
                 </Button>
             </DialogActions>
         </Dialog>

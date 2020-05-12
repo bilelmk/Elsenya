@@ -1,14 +1,6 @@
 import React, {Component} from 'react' ;
 import axios from 'axios'
 import baseURL from "./../../../utils/baseURL";
-import {withStyles, makeStyles} from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import {Link} from "react-router-dom";
 import {Add, DeleteOutline, Update, VideoCallOutlined, VideocamOutlined} from '@material-ui/icons';
 
@@ -18,31 +10,6 @@ import AdminDeleteInformation from "./admin-delete-information/AdminDeleteInform
 import AdminAddRessource from "./admin-information-ressource/admin-add-ressource/AdminAddRessource";
 
 import "./AdminInformation.scss"
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-        backgroundColor: "#00adb5",
-        color: theme.palette.common.white,
-    },
-    body: {
-        fontSize: 14,
-    },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        },
-    },
-}))(TableRow);
-
-
-const useStyles = makeStyles({
-    table: {
-        minWidth: 700,
-    },
-});
 
 
 class AdminInformation extends Component {
@@ -154,53 +121,43 @@ class AdminInformation extends Component {
                                data={this.state.addRessourcesData.data}
             />
 
+            <table>
+                <tr>
+                    <th>التغييرات</th>
+                    <th>الوصف</th>
+                    <th>العنوان</th>
+                </tr>
+                {this.state.informations.map((information) => (
+                <tr key={information.id}>
+                    <td>
+                        <button className="btn"
+                                onClick={this.openAddRessourcesDialog.bind(this, information.id)}>
+                            <VideoCallOutlined className="icon"/>
+                        </button>
 
-            <TableContainer component={Paper}>
-                <Table className={useStyles.table} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell align="center">Actions</StyledTableCell>
-                            <StyledTableCell align="center">الوصف</StyledTableCell>
-                            <StyledTableCell align="center">العنوان</StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.state.informations.map((information) => (
-                            <StyledTableRow key={information.id}>
-                                <StyledTableCell align="center">
+                        <button className="btn">
+                            <Link className="link" to={`/admin/information/${information.id}`}>
+                                <VideocamOutlined className="icon"/>
+                            </Link>
+                        </button>
 
-                                    <button className="btn"
-                                            onClick={this.openAddRessourcesDialog.bind(this, information.id)}>
-                                        <VideoCallOutlined className="icon"/>
-                                    </button>
+                        <button className="btn" onClick={this.openDeleteDialog.bind(this, information.id)}>
+                            <DeleteOutline className="icon"/>
+                        </button>
 
-                                    <button className="btn">
-                                        <Link className="link" to={`/admin/information/${information.id}`}>
-                                            <VideocamOutlined className="icon"/>
-                                        </Link>
-                                    </button>
-
-                                    <button className="btn" onClick={this.openDeleteDialog.bind(this, information.id)}>
-                                        <DeleteOutline className="icon"/>
-                                    </button>
-
-                                    <button className="btn" onClick={this.openUpdateDialog.bind(this, information)}>
-                                        <Update className="icon"/>
-                                    </button>
-
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {information.description}
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    {information.title}
-                                </StyledTableCell>
-
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        <button className="btn" onClick={this.openUpdateDialog.bind(this, information)}>
+                            <Update className="icon"/>
+                        </button>
+                    </td>
+                    <td>
+                        {information.description}
+                    </td>
+                    <td>
+                        {information.title}
+                    </td>
+                </tr>
+                ))}
+            </table>
         </div>
 
     }

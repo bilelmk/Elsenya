@@ -15,6 +15,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Map , Marker , Popup , TileLayer} from "react-leaflet";
+import MyBackdrop from "../../components/backdrop/MyBackdrop";
+import Snachbar from "../../components/snackbar/Snackbar";
 
 
 function Copyright() {
@@ -38,18 +40,25 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    backgroundColor: "#606470" ,
+
   },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3)
   },
   submit: {
+    "&:hover": {
+      backgroundColor: "#323643" ,
+    },
+    backgroundColor: "#606470" ,
     margin: theme.spacing(3, 0, 2)
   }
 }));
 
-export default function SignUp() {
+
+
+function SignUp() {
   const classes = useStyles();
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -63,23 +72,29 @@ export default function SignUp() {
   const [longitude, setLongitude] = useState(9.435263);
   const [governorate, setGovernorate] = useState("");
 
+  // backdrop state
+  const [openbackdrop, setOpenbackdrop] = useState(false);
+
+  // alert state
+  const [open , setOpen] = useState(false) ;
+  const [message , setMessage] = useState('') ;
+  const [status , setStatus] = useState('success') ;
+
   const governorates = ["أريانة","باجة","بنزرت","بن عروس","تطاوين","تونس","جندوبة","توزر", "سليانة","زغوان","سوسة","صفاقس","سيدي بوزيد",
     "قبلي","قابس","القصرين","المنستير","قفصة","القيروان","المهدية","الكاف","نابل","مدنين" , "منوبة"] ;
-
-
-  // useEffect(() => {
-  //   let map = document.getElementById("map") ;
-  //   map.addEventListener("click", (e) => { console.log(e)});
-  //   } , []);
 
   const setMarker = (e) => {
     setLatitude(e.latlng.lat);
     setLongitude(e.latlng.lng);
   };
 
+  const handleSnackbarClose = () => {
+    setOpen(false) ;
+  } ;
 
   const handleSubmit = e => {
-    e.preventDefault();
+    setOpenbackdrop(true);
+    // e.preventDefault();
 
       var user = {
         email: email,
@@ -96,14 +111,25 @@ export default function SignUp() {
       };
       axios
         .post(baseURL  + "users/signup", user)
-        .then(res => console.log(res))
+        .then(res => {
+          setOpen(true) ;
+          setMessage( "تم تسجيل المشارك بنجاح") ;
+          setStatus("success");
+          setOpenbackdrop(false);
+        })
+        .catch(err => {
+          setOpen(true) ;
+          setMessage( "خطأ في الإضافة") ;
+          setStatus("error");
+          setOpenbackdrop(false);
+        })
 
   };
 
   return (
-      <Grid container justify="center" alignItems="center" style={{width : "100%" , height : "100vh"}}>
+      <Grid className={"container"} container justify="center" alignItems="center">
         <Grid item xs={12} sm={4} >
-            <Map id="map" style={{width : "100%" , height : "85vh"}} center={[33.979809 , 9.435263]} zoom={7}   onClick={e => setMarker(e)}>
+            <Map style={{width : "100%" , height : "85vh"}} center={[33.979809 , 9.435263]} zoom={7}   onClick={e => setMarker(e)}>
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
@@ -117,9 +143,8 @@ export default function SignUp() {
         </Grid>
 
         <Grid item xs={12} sm={4} >
-          <CssBaseline />
           <div className={classes.paper}>
-            <Avatar className={classes.avatar} style={{backgroundColor : "blue"}}>
+            <Avatar className={classes.avatar}>
               <LockOutlinedIcon  />
             </Avatar>
             <form className={classes.form} noValidate>
@@ -277,6 +302,11 @@ export default function SignUp() {
             </form>
           </div>
         </Grid>
+        <MyBackdrop open={openbackdrop} />
+        <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
       </Grid>
+
   );
 }
+
+export default SignUp ;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react' ;
+import React, {useEffect, useState} from 'react' ;
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,6 +10,7 @@ import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
 import Snachbar from "../../../../components/snackbar/Snackbar";
+import "../AdminLibrary.scss"
 
 function AdminAddLibrary(props) {
     const [title, setTitle] = useState('' );
@@ -27,7 +28,13 @@ function AdminAddLibrary(props) {
         setOpen(false) ;
     } ;
 
+    useEffect(() => {
+        setTitle( '') ;
+        setDescription( '' ) ;
+    } , [props]);
+
     const handleAdd = () => {
+        setOpenbackdrop(true);
         let library = {
             title : title ,
             description : description
@@ -37,65 +44,67 @@ function AdminAddLibrary(props) {
                 props.updateTable("add" , res.data);
                 props.close();
                 setOpen(true) ;
-                setMessage( "Ajout effectué avec succès") ;
+                setMessage( "تم الإضافة بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
                 setOpen(true) ;
-                setMessage( "Erreur lors de l'ajout") ;
+                setMessage( "خطأ في الإضافة") ;
                 setStatus("error");
                 setOpenbackdrop(false);
     })};
 
     return( <div>
-    <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add Information</DialogTitle>
-        <DialogContent>
-            <form  noValidate>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            id="title"
-                            label="Title"
-                            name="title"
-                            autoComplete="title"
-                            autoFocus
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            variant="outlined"
-                            required
-                            fullWidth
-                            name="description"
-                            label="Description"
-                            id="description"
-                            autoComplete="description"
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
-                        />
-                    </Grid>
-                </Grid>
-            </form>
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={props.close} color="primary">
-                Cancel
-            </Button>
-            <Button onClick={handleAdd} color="primary">
-                Add
-            </Button>
-        </DialogActions>
-    </Dialog>
-        <MyBackdrop open={openbackdrop} />
-        <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
+            <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
+                <DialogTitle id="form-dialog-title" className={"title"}>أضافة مكتبة</DialogTitle>
+                <DialogContent className={"margin-top"}>
+                    <form  noValidate>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    dir="rtl"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    id="title"
+                                    label="العنوان"
+                                    name="title"
+                                    autoComplete="title"
+                                    autoFocus
+                                    value={title}
+                                    onChange={e => setTitle(e.target.value)}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    dir="rtl"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="description"
+                                    label="الوصف"
+                                    id="description"
+                                    autoComplete="description"
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                />
+                            </Grid>
+                        </Grid>
+                    </form>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={props.close} className={"popup-btn"}>
+                        الغاء
+                    </Button>
+                    <Button onClick={handleAdd}  className={["popup-btn" , "margin-right"]}>
+                        اضافة
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <MyBackdrop open={openbackdrop} />
+            <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
         </div>)
 }
 

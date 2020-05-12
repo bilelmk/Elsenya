@@ -10,10 +10,9 @@ import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
 import Snachbar from "../../../../components/snackbar/Snackbar";
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
+import "../AdminInformation.scss"
 
 function AdminAddInformation(props) {
-
-
 
     // information state
     const [title, setTitle] = useState('' );
@@ -47,32 +46,33 @@ function AdminAddInformation(props) {
                 props.updateTable("add" , res.data);
                 props.close();
                 setOpen(true) ;
-                setMessage( "Ajout effectué avec succès") ;
+                setMessage( "تم الإضافة بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 setOpen(true) ;
-                setMessage( "Erreur lors de l'ajout") ;
+                setMessage( "خطأ في الإضافة") ;
                 setStatus("error");
                 setOpenbackdrop(false);
         })
 
     };
 
-    return  <div>
+    return  <div >
                 <Dialog open={props.open} onClose={props.close}  aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Add Information</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle id="form-dialog-title" className={"title"}>اضافة معلومات</DialogTitle>
+                    <DialogContent className={"margin-top"}>
                         <form  noValidate>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
+                                        dir="rtl"
                                         variant="outlined"
                                         required
                                         fullWidth
                                         id="title"
-                                        label="Title"
+                                        label="العنوان"
                                         name="title"
                                         autoComplete="title"
                                         autoFocus
@@ -82,11 +82,12 @@ function AdminAddInformation(props) {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        dir="rtl"
                                         variant="outlined"
                                         required
                                         fullWidth
                                         name="description"
-                                        label="Description"
+                                        label="الوصف"
                                         id="description"
                                         autoComplete="description"
                                         value={description}
@@ -97,11 +98,11 @@ function AdminAddInformation(props) {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={props.close} color="primary">
-                            Cancel
+                        <Button onClick={props.close} className={"popup-btn"}>
+                            الغاء
                         </Button>
-                        <Button onClick={handleAdd} color="primary">
-                            Add
+                        <Button onClick={handleAdd}  className={["popup-btn" , "margin-right"]}>
+                            اضافة
                         </Button>
                     </DialogActions>
                 </Dialog>

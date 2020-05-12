@@ -11,7 +11,7 @@ import "./Information.scss"
 import { Resources } from "../resources/resources";
 import Collapse from '@material-ui/core/Collapse';
 import Fab from '@material-ui/core/Fab';
-import { KeyboardArrowDown , ImageOutlined , VideocamOutlined , PictureAsPdfOutlined } from '@material-ui/icons';
+import { KeyboardArrowDown , ImageOutlined , VideocamOutlined , PictureAsPdfOutlined , KeyboardArrowUp} from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export class Information extends Component {
+ class Information extends Component {
     state = {
         informations: [],
         isDataExist: false ,
@@ -75,6 +75,15 @@ export class Information extends Component {
             .catch(err => console.log(err));
     }
 
+    // getStatus(id) {
+    //     return this.statethis.state.open.findIndex( op =>{
+    //             return op.id === id
+    //         }
+    //
+    //     )
+    //
+    // }
+
     render() {
         const {classes} = this.props;
         return (
@@ -92,11 +101,17 @@ export class Information extends Component {
                                 <div key={uuid()}>
                                     <div className={"information"}>
                                         <div >
-                                            <p className={"title"}>
+                                            <p className={"inf-title"}>
+                                                { !this.isOpen(information.id) ?
                                                 <Fab onClick={this.handleClick.bind(this, information.id)} size="small"
                                                      style={{marginRight : "20px" , backgroundColor :"#93deff" , color : "#323643"}}>
                                                     <KeyboardArrowDown />
+                                                </Fab> :
+                                                <Fab onClick={this.handleClick.bind(this, information.id)} size="small"
+                                                     style={{marginRight : "20px" , backgroundColor :"#93deff" , color : "#323643"}}>
+                                                    <KeyboardArrowUp />
                                                 </Fab>
+                                                }
                                                 {information.title}
                                             </p>
                                             <p className={"description"}>{information.description}</p>
@@ -106,7 +121,7 @@ export class Information extends Component {
                                             {information.InformationResources.map((resource) => (
                                                 <div key={uuid()} >
                                                     <p onClick={this.changeContent.bind(this , resource)} >
-                                                        <IconButton aria-label="delete"  size="large">
+                                                        <IconButton aria-label="delete"  size="medium">
                                                             {resource.type === "image" ? <ImageOutlined style={{ color : "#eee"}}/> :
                                                             resource.type === "video" ? < VideocamOutlined style={{ color : "#eee"}} />  :
                                                             <PictureAsPdfOutlined style={{ color : "#eee"}} /> }

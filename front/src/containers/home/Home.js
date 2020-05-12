@@ -5,8 +5,10 @@ import "./Home.scss";
 import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
-import SideBar from "../sidebar/SideBar";
 import SignUp from "../signUpPage/SignUpPage";
+import SideBar from "../sidebar/SideBar";
+import Welcome from "../welcome/Welcome";
+
 
 function Home() {
     return (
@@ -15,6 +17,7 @@ function Home() {
                 {/*<Header />*/}
                 <Switch>
                     <Redirect exact from="/" to="/home" />
+                    <Route path="/home/welcome" exact component={Welcome} />
                     <Route path="/home" exact component={HomeMap} />
                     <Route path="/home/library" exact component={Library} />
                     <Route path="/home/information" exact component={Information} />

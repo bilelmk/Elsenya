@@ -1,4 +1,4 @@
-import React, {useState} from 'react' ;
+import React, {useEffect, useState} from 'react' ;
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -9,8 +9,6 @@ import Grid from "@material-ui/core/Grid";
 import axios from 'axios'
 import baseURL from "../../../../utils/baseURL";
 import {makeStyles} from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress/CircularProgress";
-import Backdrop from "@material-ui/core/Backdrop/Backdrop";
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
 import Snachbar from "../../../../components/snackbar/Snackbar";
 
@@ -23,12 +21,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function AdminUpdateLibrary(props) {
+
     const classes = useStyles();
-    const [title, setTitle] = useState(null);
-    const [description, setDescription] = useState(null);
-
-
-
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
 
     // alert state
     const [open , setOpen] = useState(false) ;
@@ -45,57 +41,65 @@ function AdminUpdateLibrary(props) {
         setOpenbackdrop(true);
         let library = {
             id: props.data.id,
-            title: title !== null ? title : props.data.title,
-            description: description !== null ? description : props.data.description,
+            title: title ,
+            description: description ,
         };
         axios.put(baseURL + "libraries", library)
             .then(res => {
                 props.updateTable("update" , library);
                 props.close();
                 setOpen(true) ;
-                setMessage( "Modification effectué avec succès") ;
+                setMessage( "تم الانتهاء من التعديل بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
                 setOpen(true) ;
-                setMessage( "Erreur lors de la modification") ;
+                setMessage( "حدث خطأ أثناء التعديل") ;
                 setStatus("error");
                 setOpenbackdrop(false);
             })
     };
 
+    useEffect(() => {
+        setTitle(props.data  ? props.data.title : '') ;
+        setDescription(props.data ? props.data.description : '' ) ;
+    } , [props.data]);
+
+
     return <div>
         <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Update Library information</DialogTitle>
-            <DialogContent>
+            <DialogTitle id="form-dialog-title" className={"title"}>تحديث المكتبة</DialogTitle>
+            <DialogContent className={"margin-top"}>
                 <form noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <TextField
+                                dir="rtl"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="title"
-                                label="Title"
+                                label="العنوان"
                                 name="title"
                                 autoComplete="title"
                                 autoFocus
-                                value={title !== null ? title : props.data ? props.data.title : ''}
+                                value={ title }
                                 onChange={e => setTitle(e.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
+                                dir="rtl"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 name="description"
-                                label="Description"
+                                label="الوصف"
                                 id="description"
                                 autoComplete="description"
-                                value={description !== null ? description : props.data ? props.data.description : ''}
+                                value={ description }
                                 onChange={e => setDescription(e.target.value)}
                             />
                         </Grid>
@@ -103,11 +107,11 @@ function AdminUpdateLibrary(props) {
                 </form>
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.close} color="primary">
-                    Cancel
+                <Button onClick={props.close} className={"popup-btn"}>
+                    الغاء
                 </Button>
-                <Button color="primary" onClick={handleUpdate}>
-                    Update
+                <Button onClick={handleUpdate}  className={["popup-btn" , "margin-right"]}>
+                    تحديث
                 </Button>
             </DialogActions>
         </Dialog>

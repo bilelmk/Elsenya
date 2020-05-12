@@ -10,6 +10,7 @@ import axios from 'axios'
 import baseURL from "../../../../utils/baseURL" ;
 import MyBackdrop from "../../../../components/backdrop/MyBackdrop";
 import Snachbar from "../../../../components/snackbar/Snackbar";
+import "../AdminInformation.scss"
 
 function AdminUpdateInformation(props) {
 
@@ -46,14 +47,14 @@ function AdminUpdateInformation(props) {
                 props.updateTable("update" , information);
                 props.close();
                 setOpen(true) ;
-                setMessage( "Modification effectué avec succès") ;
+                setMessage( "تم الانتهاء من التعديل بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.log(err);
                 setOpen(true) ;
-                setMessage( "Erreur lors de la modification") ;
+                setMessage( "حدث خطأ أثناء التعديل") ;
                 setStatus("error");
                 setOpenbackdrop(false);
             })
@@ -61,17 +62,18 @@ function AdminUpdateInformation(props) {
 
     return  <div>
                 <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Update Information</DialogTitle>
-                    <DialogContent>
+                    <DialogTitle id="form-dialog-title" className={"title"} >تحديث المعلومات</DialogTitle>
+                    <DialogContent className={"margin-top"}>
                         <form  noValidate>
                             <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <TextField
+                                        dir="rtl"
                                         variant="outlined"
                                         required
                                         fullWidth
                                         id="title"
-                                        label="Title"
+                                        label="العنوان"
                                         name="title"
                                         autoComplete="title"
                                         autoFocus
@@ -81,11 +83,12 @@ function AdminUpdateInformation(props) {
                                 </Grid>
                                 <Grid item xs={12}>
                                     <TextField
+                                        dir="rtl"
                                         variant="outlined"
                                         required
                                         fullWidth
                                         name="description"
-                                        label="Description"
+                                        label="الوصف"
                                         id="description"
                                         autoComplete="description"
                                         value={ description }
@@ -96,11 +99,11 @@ function AdminUpdateInformation(props) {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={props.close} color="primary">
-                            Cancel
+                        <Button onClick={props.close} className={"popup-btn"}>
+                            الغاء
                         </Button>
-                        <Button color="primary" onClick={handleUpdate}>
-                            Update
+                        <Button onClick={handleUpdate}  className={["popup-btn" , "margin-right"]}>
+                            تحديث
                         </Button>
                     </DialogActions>
                 </Dialog>

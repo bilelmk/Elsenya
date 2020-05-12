@@ -15,7 +15,6 @@ import AdminLibrary from "./admin-library/AdminLibrary";
 import AdminSideBar from "./admin-sidebar/AdminSideBar";
 import AdminInformationRessource from "./admin-information/admin-information-ressource/AdminInformationRessource";
 import AdminLibraryRessource from "./admin-library/admin-library-ressource/AdminLibraryRessource" ;
-import Snachbar from "../../components/snackbar/Snackbar";
 
 const drawerWidth = 300;
 

@@ -1,4 +1,4 @@
-import React  from 'react' ;
+import React, {useState} from 'react' ;
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -6,32 +6,62 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import axios from "axios";
 import baseURL from "../../../../../utils/baseURL";
+import MyBackdrop from "../../../../../components/backdrop/MyBackdrop";
+import Snachbar from "../../../../../components/snackbar/Snackbar";
 
 function AdminDeleteLibraryResource (props) {
 
     const handleDelete= () => {
+        setOpenbackdrop(true);
         axios.delete(baseURL +"library-resources/" + props.data.id , { data : {content : props.data.content }})
             .then(res => {
                 props.updateTable("delete",props.data)
                 props.close()
+                setOpen(true) ;
+                setMessage( "تم الحذف بنجاح") ;
+                setStatus("success");
+                setOpenbackdrop(false);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setOpen(true) ;
+                setMessage( "حدث خطأ أثناء الحذف") ;
+                setStatus("error");
+                setOpenbackdrop(false);
+            } )
     };
 
-    return <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Delete Resource</DialogTitle>
-        <DialogContent>
+    // backdrop state
+    const [openbackdrop, setOpenbackdrop] = useState(false);
 
-        </DialogContent>
-        <DialogActions>
-            <Button onClick={props.close} color="primary">
-                Cancel
-            </Button>
-            <Button onClick={handleDelete} color="primary">
-                Delete
-            </Button>
-        </DialogActions>
-    </Dialog>
+    // alert state
+    const [open , setOpen] = useState(false) ;
+    const [message , setMessage] = useState('') ;
+    const [status , setStatus] = useState('success')
+
+    const handleSnackbarClose = () => {
+        setOpen(false) ;
+    } ;
+
+    return <div>
+                <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title" className={"title"}>حذف المحتوى</DialogTitle>
+                    <DialogContent>
+
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={props.close} className={"popup-btn"}>
+                            الغاء
+                        </Button>
+                        <Button onClick={handleDelete}  className={"popup-btn" }>
+                            حذف
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <MyBackdrop open={openbackdrop} />
+                <Snachbar message={message}  open={open} status={status} close={handleSnackbarClose}/>
+         </div>
+
 }
 
 export default AdminDeleteLibraryResource

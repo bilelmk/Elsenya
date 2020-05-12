@@ -7,7 +7,7 @@ import Dialog from "@material-ui/core/Dialog/Dialog";
 
 function AdminInformationUpdateRessource(props) {
    return <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Update Ressource</DialogTitle>
+            <DialogTitle id="form-dialog-title" className={"title"} >Update Ressource</DialogTitle>
             <DialogContent>
 
             </DialogContent>

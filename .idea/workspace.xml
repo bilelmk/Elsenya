@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eeb00e23-536b-4d86-ad34-4b6a6da9efe6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/admin-delete-library-resource/AdminDeleteLibraryResource.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/admin-update-library-resource/AdminUpdateLibraryResource.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/containers/library/Library.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/routes/library-resource.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/library-resource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/models/library.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/models/library.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/routes/library.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/library.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-information/AdminInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-information/AdminInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/AdminLibrary.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/AdminLibrary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-add-library/AdminAddLibrary.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-add-library/AdminAddLibrary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-delete-library/AdminDeleteLibrary.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-delete-library/AdminDeleteLibrary.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/AdminLibraryRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/AdminLibraryRessource.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-update-library/AdminUpdateLibrary.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-update-library/AdminUpdateLibrary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/containers/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/resources/resources.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/resources/resources.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/information/Information.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/information/Information.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/library/Library.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/library/Library.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +39,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -59,6 +55,7 @@
       <workItem from="1588971582227" duration="4740000" />
       <workItem from="1588977608127" duration="10555000" />
       <workItem from="1589039270097" duration="5436000" />
+      <workItem from="1589064611297" duration="4196000" />
     </task>
     <servers />
   </component>

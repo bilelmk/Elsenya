@@ -30,14 +30,14 @@ function AdminDeleteLibrary(props) {
                 props.updateTable("delete" , props.data)
                 props.close();
                 setOpen(true) ;
-                setMessage( "Suppression effectué avec succès") ;
+                setMessage( "تم الحذف بنجاح") ;
                 setStatus("success");
                 setOpenbackdrop(false);
             })
             .catch(err => {
                 console.error(err);
                 setOpen(true) ;
-                setMessage( "Erreur lors de la suppression") ;
+                setMessage( "حدث خطأ أثناء الحذف") ;
                 setStatus("error");
                 setOpenbackdrop(false);
             })
@@ -45,16 +45,16 @@ function AdminDeleteLibrary(props) {
 
     return <div>
         <Dialog open={props.open} onClose={props.close} aria-labelledby="form-dialog-title">
-            <DialogTitle id="form-dialog-title">Delete Library information</DialogTitle>
+            <DialogTitle id="form-dialog-title" className={"title"}>حذف مكتبة</DialogTitle>
             <DialogContent>
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={props.close} color="primary">
-                    Cancel
+                <Button onClick={props.close} className={"popup-btn"}>
+                    الغاء
                 </Button>
-                <Button onClick={handleDelete} color="primary">
-                    Delete
+                <Button onClick={handleDelete}  className={"popup-btn" }>
+                    حذف
                 </Button>
             </DialogActions>
         </Dialog>

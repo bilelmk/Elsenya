@@ -13,7 +13,7 @@ function SideBar() {
 
   return (
       <div className="vertical-menu">
-        <NavLink className="NavLink" to="/" exact>
+        <NavLink className="NavLink" to="/home/welcome" exact>
            <Button className="vertical-menu-btn">الإستقبال</Button>
         </NavLink>
         <NavLink className="NavLink" to="/home" exact>
