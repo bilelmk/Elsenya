@@ -11,6 +11,8 @@ import "./Information.scss"
 import {Resources} from "../resources/resources";
 import Collapse from '@material-ui/core/Collapse';
 import Fab from '@material-ui/core/Fab';
+import IconButton from '@material-ui/core/IconButton';
+
 import {
     KeyboardArrowDown,
     ImageOutlined,
@@ -18,8 +20,8 @@ import {
     PictureAsPdfOutlined,
     KeyboardArrowUp
 } from '@material-ui/icons';
-import IconButton from '@material-ui/core/IconButton';
 
+import Zoom from 'react-reveal/Zoom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,87 +85,76 @@ class Information extends Component {
                 });
 
             })
-            .catch(err =>         this.setState({isLoading:false})
+            .catch(err => this.setState({isLoading:false})
             );
     }
-
-    // getStatus(id) {
-    //     return this.statethis.state.open.findIndex( op =>{
-    //             return op.id === id
-    //         }
-    //
-    //     )
-    //
-    // }
 
     render() {
         const {classes} = this.props;
         return (
             <div className={"inf-container"}>
 
-                <div className={"content"}>
-                    <Resources resource={this.state.information_resources} isLoading={this.state.isLoading}/>
+                <div className={"inf-content"}>
+                    <Zoom ><Resources resource={this.state.information_resources} isLoading={this.state.isLoading}/></Zoom>
                 </div>
 
-                <div className={"liste"}>
-                    <Paper style={{height: '92vh', overflow: 'auto', backgroundColor: "#222831"}} elevation={3}>
-                        <List className={classes.root}>
-                            {this.state.informations.map(information => {
-                                return (
-                                    <div key={uuid()}>
-                                        <div className={"information"}>
-                                            <div>
-                                                <p className={"inf-title"}>
-                                                    {!this.isOpen(information.id) ?
-                                                        <Fab onClick={this.handleClick.bind(this, information.id)}
-                                                             size="small"
-                                                             style={{
-                                                                 marginRight: "20px",
-                                                                 backgroundColor: "#93deff",
-                                                                 color: "#323643"
-                                                             }}>
-                                                            <KeyboardArrowDown/>
-                                                        </Fab> :
-                                                        <Fab onClick={this.handleClick.bind(this, information.id)}
-                                                             size="small"
-                                                             style={{
-                                                                 marginRight: "20px",
-                                                                 backgroundColor: "#93deff",
-                                                                 color: "#323643"
-                                                             }}>
-                                                            <KeyboardArrowUp/>
-                                                        </Fab>
-                                                    }
-                                                    {information.title}
-                                                </p>
-                                                <p className={"description"}>{information.description}</p>
+                <Zoom>
+                    <div className={"liste"}>
+                        <Paper className={"liste-poper"} elevation={3}>
+                            <List className={classes.root}>
+                                {this.state.informations.map(information => {
+                                    return (
+                                        <div key={uuid()}>
+                                            <div className={"information"}>
+                                                <div>
+                                                    <p className={"inf-title"}>
+                                                        {!this.isOpen(information.id) ?
+                                                            <Fab onClick={this.handleClick.bind(this, information.id)}
+                                                                 size="small"
+                                                                 className={"inf-fab"}>
+                                                                <KeyboardArrowDown/>
+                                                            </Fab> :
+                                                            <Fab onClick={this.handleClick.bind(this, information.id)}
+                                                                 size="small"
+                                                                 className={"inf-fab"}>
+                                                                <KeyboardArrowUp/>
+                                                            </Fab>
+                                                        }
+                                                        {information.title}
+                                                    </p>
+                                                    <p className={"description"}>{information.description}</p>
+
+                                                </div>
+
+                                                    <Collapse className={"information-resource"}
+                                                              in={this.isOpen(information.id)} timeout="auto" unmountOnExit>
+                                                                {information.InformationResources.map((resource) => (
+
+                                                                    <div  key={uuid()}>
+                                                                        <p onClick={this.changeContent.bind(this, resource)}>
+                                                                            <IconButton aria-label="delete" size="medium">
+                                                                                {resource.type === "image" ?
+                                                                                    <ImageOutlined className={"inf-icon"}/> :
+                                                                                    resource.type === "video" ?
+                                                                                        < VideocamOutlined  className={"inf-icon"}/> :
+                                                                                        <PictureAsPdfOutlined  className={"inf-icon"}/>}
+                                                                            </IconButton>
+                                                                            {resource.title}
+                                                                        </p>
+                                                                    </div>
+
+                                                            )
+                                                        )}
+                                                        </Collapse>
 
                                             </div>
-                                            <Collapse className={"information-resource"}
-                                                      in={this.isOpen(information.id)} timeout="auto" unmountOnExit>
-                                                {information.InformationResources.map((resource) => (
-                                                        <div key={uuid()}>
-                                                            <p onClick={this.changeContent.bind(this, resource)}>
-                                                                <IconButton aria-label="delete" size="medium">
-                                                                    {resource.type === "image" ?
-                                                                        <ImageOutlined style={{color: "#eee"}}/> :
-                                                                        resource.type === "video" ?
-                                                                            < VideocamOutlined style={{color: "#eee"}}/> :
-                                                                            <PictureAsPdfOutlined style={{color: "#eee"}}/>}
-                                                                </IconButton>
-                                                                {resource.title}
-                                                            </p>
-                                                        </div>
-                                                    )
-                                                )}
-                                            </Collapse>
                                         </div>
-                                    </div>
-                                )
-                            })}
-                        </List>
-                    </Paper>
-                </div>
+                                    )
+                                })}
+                            </List>
+                        </Paper>
+                    </div>
+                </Zoom>
             </div>
         );
     }

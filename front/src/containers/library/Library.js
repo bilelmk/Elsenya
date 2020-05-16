@@ -20,6 +20,7 @@ import {withRouter} from "react-router-dom";
 
 
 import "./Library.scss"
+import Zoom from 'react-reveal/Zoom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -83,28 +84,28 @@ class Library extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className={"inf-container"} >
+            <div className={"lib-container"} >
 
-                <div className={"content"} >
-                    <Resources  resource={this.state.library_resources}/>
+                <div className={"lib-content"} >
+                    <Zoom><Resources  resource={this.state.library_resources}/></Zoom>
                 </div>
-
+                <Zoom>
                 <div  className={"liste"} >
-                    <Paper style={{ height:'92vh' , overflow: 'auto' ,backgroundColor: "#222831"}}  elevation={3}>
+                    <Paper className={"liste-poper"}  elevation={3}>
                         <List className={classes.root}>
                             {this.state.libraries.map(library => {
                                 return (
                                     <div key={uuid()}>
                                         <div className={"information"}>
                                             <div >
-                                                <p className={"inf-title"}>
+                                                <p className={"lib-title"}>
                                                     { !this.isOpen(library.id) ?
                                                         <Fab onClick={this.handleClick.bind(this, library.id)} size="small"
-                                                             style={{marginRight : "20px" , backgroundColor :"#93deff" , color : "#323643"}}>
+                                                             className={"lib-fab"}>
                                                             <KeyboardArrowDown />
                                                         </Fab> :
                                                         <Fab onClick={this.handleClick.bind(this, library.id)} size="small"
-                                                             style={{marginRight : "20px" , backgroundColor :"#93deff" , color : "#323643"}}>
+                                                             className={"lib-fab"}>
                                                             <KeyboardArrowUp />
                                                         </Fab>
                                                     }
@@ -113,14 +114,14 @@ class Library extends Component {
                                                 <p className={"description"}>{library.description}</p>
 
                                             </div>
-                                            <Collapse className={"information-resource"} in={this.isOpen(library.id)} timeout="auto" unmountOnExit>
+                                            <Collapse className={"lib-resource"} in={this.isOpen(library.id)} timeout="auto" unmountOnExit>
                                                 {library.LibraryResources.map((resource) => (
                                                         <div key={uuid()} >
                                                             <p onClick={this.changeContent.bind(this , resource)} >
                                                                 <IconButton aria-label="delete"  size="medium">
-                                                                    {resource.type === "image" ? <ImageOutlined style={{ color : "#eee"}}/> :
-                                                                        resource.type === "video" ? < VideocamOutlined style={{ color : "#eee"}} />  :
-                                                                            <PictureAsPdfOutlined style={{ color : "#eee"}} /> }
+                                                                    {resource.type === "image" ? <ImageOutlined className={"lib-icon"} /> :
+                                                                        resource.type === "video" ? < VideocamOutlined className={"lib-icon"} />  :
+                                                                            <PictureAsPdfOutlined className={"lib-icon"} /> }
                                                                 </IconButton>
                                                                 {resource.title}
                                                             </p>
@@ -134,6 +135,7 @@ class Library extends Component {
                         </List>
                     </Paper>
                 </div>
+                </Zoom>
             </div>
         );
     }

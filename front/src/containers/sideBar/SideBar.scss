@@ -1,0 +1,189 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    .vertical-menu {
+        text-align: right;
+        padding: 0 50px;
+        height: 70px ;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    }
+
+    .NavLink {
+        visibility: hidden;
+    }
+
+    .side-image {
+        height: 50px ;
+        margin: 0;
+        float: left;
+        padding: 10px 0;
+    }
+
+    .menu-btn {
+        font-weight: bold;
+        float: right;
+        background-color: #3f915e;
+        color: #eee !important;
+        width: 50px;
+        height: 50px;
+        margin: 10px 5px;
+        border: none;
+        border-radius: 50px;
+        outline : none ;
+        cursor: pointer;
+        transition: 0.4s !important;
+    }
+
+    /*.menu-btn:focus{*/
+    /*    border-radius: 50px;*/
+    /*    background-color: #4c7e59;*/
+    /*}*/
+
+    .sm-menu-link {
+        text-decoration: none;
+        text-align: center;
+        p {
+            margin: 0;
+            background-color: #3f915e !important;
+            padding: 15px 0;
+            color: #eee;
+            border-bottom: 0.5px solid rgba(238, 238, 238, 0.6);
+        }
+    }
+
+}
+
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .menu-btn {
+        visibility: hidden;
+    }
+
+    .vertical-menu {
+        text-align: right;
+        padding: 0 50px;
+        height: 70px ;
+        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
+    }
+
+    .vertical-menu-btn {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', serif !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        color: #232931 !important;
+        text-transform: none !important;
+
+        width: 90px;
+        height: 50px;
+        margin: 10px 5px;
+        background-color: transparent;
+
+        border: none;
+        border-radius: 2px;
+        outline : none ;
+        cursor: pointer;
+
+        transition: 0.4s !important;
+    }
+
+    .NavLink {
+        text-decoration: none;
+        color: white;
+    }
+
+    .active Button{
+        border-bottom: 4px solid #589167 ;
+        background-color: rgba(126, 208, 147, 0.35) !important;
+        color: #232931 !important;
+    }
+
+    .vertical-menu-btn:hover{
+        background-color: rgba(126, 208, 147, 0.35) !important;
+        color: #232931 !important;
+    }
+
+    .side-image {
+        height: 50px ;
+        margin: 0;
+        float: left;
+        padding: 10px 0;
+    }
+
+
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 1000px) {
+    .vertical-menu {
+        padding: 0 150px;
+    }
+}
+
+
+
+
+.fade-in-top {
+    -webkit-animation: fade-in-top 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    animation: fade-in-top 0.8s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+
+@-webkit-keyframes fade-in-top {
+    0% {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes fade-in-top {
+    0% {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.fade-out-top {
+    -webkit-animation: fade-out-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: fade-out-top 0.8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+
+@-webkit-keyframes fade-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+@keyframes fade-out-top {
+    0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: translateY(-50px);
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}

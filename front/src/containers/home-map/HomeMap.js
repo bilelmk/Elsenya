@@ -2,8 +2,10 @@ import React ,  { Component } from 'react'
 import { Map , Marker , Popup , TileLayer} from "react-leaflet";
 import axios from 'axios' ;
 import baseURL from "../../utils/baseURL";
-import "./HomeMap.scss"
 import Paper from "@material-ui/core/Paper/Paper";
+
+import "./HomeMap.scss"
+import Zoom from 'react-reveal/Zoom';
 
 class HomeMap extends Component {
 
@@ -27,40 +29,42 @@ class HomeMap extends Component {
 
     render (){
         return  <div className={"map-container"}>
-                    <Map className={"map"} center={[33.979809 , 9.435263]} zoom={7}>
-                        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        />
-                        {this.state.users.map(user => (
-                                <Marker
-                                    key={user.id}
-                                    position={[user.latitude , user.longitude  ]}
-                                    onClick={() => {
-                                        this.setState({activeUser : user});
+                    <Zoom>
+                        <Map className={"map"} center={[33.979809 , 9.435263]} zoom={7}>
+                            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            />
+                            {this.state.users.map(user => (
+                                    <Marker
+                                        key={user.id}
+                                        position={[user.latitude , user.longitude  ]}
+                                        onClick={() => {
+                                            this.setState({activeUser : user});
+                                        }}
+                                    />
+                                )
+                            )}
+                            {this.state.activeUser && (
+                                <Popup
+                                    position={[
+                                        this.state.activeUser.latitude,
+                                        this.state.activeUser.longitude
+                                    ]}
+                                    onClose={() => {
+                                        this.setState({activeUser : null});
                                     }}
-                                />
-                            )
-                        )}
-                        {this.state.activeUser && (
-                            <Popup
-                                position={[
-                                    this.state.activeUser.latitude,
-                                    this.state.activeUser.longitude
-                                ]}
-                                onClose={() => {
-                                    this.setState({activeUser : null});
-                                }}
-                            >
-                                <div className={"popup"}>
-                                    <h1>{this.state.activeUser.firstname}</h1>
-                                    <h2 className={"message"}>{this.state.activeUser.comment} </h2>
-                                    <h2>{this.state.activeUser.governorate} {this.state.activeUser.place}</h2>
-                                    <h2>الزراعات : {this.state.activeUser.agriculture} </h2>
-                                </div>
-                            </Popup>
-                        )}
-                    </Map>
-                    <div >
+                                >
+                                    <div className={"popup"}>
+                                        <h1>{this.state.activeUser.firstname}</h1>
+                                        <h2 className={"message"}>{this.state.activeUser.comment} </h2>
+                                        <h2>{this.state.activeUser.governorate} {this.state.activeUser.place}</h2>
+                                        <h2>الزراعات : {this.state.activeUser.agriculture} </h2>
+                                    </div>
+                                </Popup>
+                            )}
+                        </Map>
+                    </Zoom>
+                    <Zoom>
                         <Paper className={"stat"} elevation={3}>
                             <img src="/assets/logo.png" alt="no image"/>
                             <div>
@@ -80,7 +84,7 @@ class HomeMap extends Component {
                                 </div>
                             </div>
                         </Paper>
-                    </div>
+                    </Zoom>
                 </div>
     }
 }

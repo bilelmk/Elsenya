@@ -1,0 +1,38 @@
+.toolbar-text {
+  color: #eee;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toolbar-icon {
+  font-size: 20px !important;
+  color: #eee;
+  display: block;
+  font-weight: 500;
+  margin-right : 8px ;
+  float : left;
+
+}
+
+.social-icons {
+  float: right;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .toolbar {
+    background: #589167 ;
+    margin: 0;
+    padding: 8px 15px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .toolbar {
+    background: #589167 ;
+    margin: 0;
+    padding: 8px 150px;
+  }
+}

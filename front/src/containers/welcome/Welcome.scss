@@ -1,0 +1,332 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .welcome {
+    margin:  2% 2%; ////////
+
+    img {
+      width: 100%;
+    }
+
+    ul {
+      padding: 20px 50px 20px 20px;
+
+      li {
+        line-height: 1.8;
+        font-size: 16px ;
+        direction :  rtl;
+        text-align: right;
+      }
+    }
+
+    .site-description {
+      background: rgba(104, 145, 62, 0.17);
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+
+      h2 {
+
+        margin: 0 0 50px 0;
+        padding: 10px;
+        background-color: #3f915e;
+        font-size: 20px ; ////////
+        //color: #eeeeee;
+        text-align: center;
+        font-weight: 400;
+      }
+
+      p {
+        line-height: 1.8;
+        padding: 0 30px;
+        text-align: center;
+        font-size: 100%;/////////////
+      }
+
+      .hbs-image {
+        width: 100%;
+      }
+    }
+
+    .elsenya {
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+      margin: 100px 0;
+      display: grid;
+      grid-template-columns:  1fr ;
+
+      .elsenya-description {
+        background: rgba(104, 145, 62, 0.17);
+        border-bottom: 7px solid  #3f915e;
+
+        h2 {
+          margin: 0;
+          padding: 10px;
+          background-color: #3f915e;
+          font-size: 20px ;
+          color: #eeeeee;
+          text-align: center;
+          font-weight: 400;
+        }
+
+        p {
+          padding: 10px;
+          text-align: right;
+          font-size: 100%;
+          line-height:  1.8;
+        }
+      }
+      .elsenya-image {
+        align-self: center;
+        padding: 5%;
+      }
+    }
+
+
+    .apek {
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+      margin: 100px 0;
+      display: grid;
+      grid-template-columns:  1fr;
+
+      .apek-description {
+        background: rgba(104, 145, 62, 0.17);
+        border-bottom: 7px solid  #3f915e;
+        h2 {
+          margin: 0;
+          padding: 10px;
+          background-color: #3f915e;
+          font-size: 20px ;
+          color: #eeeeee;
+          text-align: center;
+          font-weight: 400;
+        }
+
+        p {
+          line-height: 1.8;
+          padding: 10px;
+          text-align: right;
+          font-size: 100%;
+        }
+      }
+      .apek-image {
+        align-self: center;
+        padding: 5%;
+      }
+    }
+
+  }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 600px) {
+  .welcome {
+
+    margin:  5% 5%; ////////
+
+    img {
+      width: 100%;
+    }
+
+    ul {
+      padding: 20px 50px 20px 20px;
+
+      li {
+        line-height: 1.8;
+        font-size: 20px ;
+        direction :  rtl;
+        text-align: right;
+      }
+    }
+
+
+    .site-description {
+      background: rgba(104, 145, 62, 0.17);
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+
+      h2 {
+        margin: 0 0 50px 0;
+        padding: 10px;
+        background-color: #3f915e;
+        font-size: 20px ; ////////
+        color: #eeeeee;
+        text-align: center;
+        font-weight: 400;
+      }
+
+      p {
+        line-height: 1.8;
+        padding: 0 30px;
+        text-align: center;
+        font-size: 110%;/////////////
+      }
+
+      .hbs-image {
+        width: 60%;
+        padding: 0 20%;
+      }
+    }
+
+    .elsenya {
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+      margin: 100px 0;
+      display: grid;
+      grid-template-columns:  3fr 7fr ;
+
+      .elsenya-description {
+        background: rgba(104, 145, 62, 0.17);
+        border-bottom: 7px solid  #3f915e;
+
+        h2 {
+          margin: 0;
+          padding: 10px;
+          background-color: #3f915e;
+          font-size: 20px ;
+          color: #eeeeee;
+          text-align: center;
+          font-weight: 400;
+        }
+
+        p {
+          padding: 20px;
+          text-align: right;
+          font-size: 110%;
+          line-height:  1.8;
+        }
+      }
+      .elsenya-image {
+        align-self: center;
+        padding: 5%;
+      }
+    }
+
+
+    .apek {
+      box-shadow: 0 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12);
+      margin: 100px 0;
+      display: grid;
+      grid-template-columns:   7fr 3fr;
+
+      .apek-description {
+        background: rgba(104, 145, 62, 0.17);
+        border-bottom: 7px solid  #3f915e;
+        h2 {
+          margin: 0;
+          padding: 10px;
+          background-color: #3f915e;
+          font-size: 20px ;
+          color: #eeeeee;
+          text-align: center;
+          font-weight: 400;
+        }
+
+        p {
+          line-height: 1.8;
+          padding: 20px;
+          text-align: right;
+          font-size: 110%;
+        }
+      }
+      .apek-image {
+        align-self: center;
+        padding: 5%;
+      }
+    }
+
+  }
+
+}
+
+
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 1200px) {
+
+  .welcome {
+    margin:  5% 12%; ////////
+
+    .site-description {
+      h2 {
+        font-size: 30px ; ////////
+      }
+      p {
+        font-size: 120%;/////////////
+      }
+    }
+
+    .elsenya {
+      .elsenya-description {
+        h2 {
+          font-size: 30px ;
+        }
+        p {
+          font-size: 120%;
+        }
+      }
+    }
+
+
+    .apek {
+      .apek-description {
+        h2 {
+          font-size: 30px ;
+        }
+        p {
+          font-size: 120%;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+@media only screen and (min-width: 1500px) {
+
+  .welcome {
+
+    margin:  5% 20%;
+
+    .site-description {
+      h2 {
+        font-size: 30px ;
+      }
+      p {
+        font-size: 130%;
+      }
+    }
+
+    .elsenya {
+      .elsenya-description {
+        h2 {
+          font-size: 30px ;
+        }
+        p {
+          padding: 30px;
+          font-size: 130%;
+        }
+      }
+    }
+
+    .apek {
+      .apek-description {
+        h2 {
+          font-size: 30px ;
+        }
+        p {
+          padding: 30px;
+          font-size: 130%;
+        }
+      }
+    }
+  }
+
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+
+

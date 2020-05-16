@@ -1,0 +1,30 @@
+.footer {
+  margin-top: 150px;
+  background-color: #232931 ;
+
+  .contact {
+    text-align: left;
+    padding: 10px;
+    border: none;
+  }
+  img {
+    width: 100%;
+  }
+  p {
+    border-top : 0.5px solid rgba(247, 247, 247, 0.48);
+    padding: 25px;
+    text-align: center;
+    color : #f7f7f7;
+    margin: 0;
+  }
+  .address {
+    color:#f7f7f7;
+  }
+
+  .footer-fab {
+    margin-right: 20px !important;
+    background-color: #4db173 !important;
+    color: #eee !important
+  }
+
+}

@@ -8,11 +8,9 @@ import {
 import Home from "./containers/home/Home";
 import Admin from "./containers/admin/Admin";
 import "./App.css";
-import jwt from "jsonwebtoken";
-import UserContext, {StateProvider} from "./context/UserContext";
+import {StateProvider} from "./context/UserContext";
 
 import axios from "axios";
-import Welcome from "./containers/welcome/Welcome";
 import PrivateRoute from "./containers/admin/PrivateRoute";
 function RouteWithSubRoutes(route) {
     return (
