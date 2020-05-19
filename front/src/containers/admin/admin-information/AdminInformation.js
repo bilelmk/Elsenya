@@ -122,11 +122,14 @@ class AdminInformation extends Component {
             />
 
             <table>
+                <thead>
                 <tr>
                     <th>التغييرات</th>
                     <th>الوصف</th>
                     <th>العنوان</th>
                 </tr>
+                </thead>
+                <tbody>
                 {this.state.informations.map((information) => (
                 <tr key={information.id}>
                     <td>
@@ -157,6 +160,7 @@ class AdminInformation extends Component {
                     </td>
                 </tr>
                 ))}
+                </tbody>
             </table>
         </div>
 

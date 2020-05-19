@@ -3,6 +3,7 @@ import { Map , Marker , Popup , TileLayer} from "react-leaflet";
 import axios from 'axios' ;
 import baseURL from "../../utils/baseURL";
 import Paper from "@material-ui/core/Paper/Paper";
+import uuid from 'react-uuid'
 
 import "./HomeMap.scss"
 import Zoom from 'react-reveal/Zoom';
@@ -70,7 +71,7 @@ class HomeMap extends Component {
                             <div>
                                 <p className={"question"}>قداش من تونسي يحب يرد لبلاد الكل سانية ؟</p>
                                 {this.state.stat.map(stat => (
-                                        <p className={"governorate"} >{stat.governorate} : {stat.number}</p>
+                                        <p key={uuid()} className={"governorate"} >{stat.governorate} : {stat.number}</p>
                                     )
                                 )}
                             </div>

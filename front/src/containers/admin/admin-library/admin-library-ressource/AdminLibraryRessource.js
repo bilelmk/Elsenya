@@ -62,13 +62,12 @@ class AdminLibraryRessource extends Component {
             this.state.library_resources.map(library => {
                 if (library.id === data.id) {
                     library.title = data.title;
-                    library.type=data.type;
-                    if (typeof data.content === 'string' || data.content instanceof String){
+                    library.type = data.type;
+                    if (typeof data.content === 'string' || data.content instanceof String) {
 
-                        let list=data.content.split("/")
-                        library.content=list[list.length-1]
-                    }
-                    else library.content=data.content.name
+                        let list = data.content.split("/")
+                        library.content = list[list.length - 1]
+                    } else library.content = data.content.name
 
                 }
             })
@@ -98,16 +97,19 @@ class AdminLibraryRessource extends Component {
             />
 
             <table>
+                <thead>
                 <tr>
                     <th>التغييرات</th>
                     <th>المحتوى</th>
                     <th>نوع المحتوى</th>
                     <th>العنوان</th>
                 </tr>
+                </thead>
+                <tbody>
                 {this.state.library_resources.map((information_resource) => (
                     <tr key={information_resource.id}>
                         <td>
-                            <button className="btn" onClick={this.openDeleteDialog.bind(this , information_resource)}>
+                            <button className="btn" onClick={this.openDeleteDialog.bind(this, information_resource)}>
                                 <DeleteOutline className="icon"/>
                             </button>
 
@@ -126,6 +128,7 @@ class AdminLibraryRessource extends Component {
                         </td>
                     </tr>
                 ))}
+                </tbody>
             </table>
 
         </div>

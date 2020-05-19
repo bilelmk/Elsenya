@@ -7,7 +7,8 @@ import AdminDeleteLibrary from "./admin-delete-library/AdminDeleteLibrary";
 import {Add, DeleteOutline, Update, VideoCallOutlined, VideocamOutlined} from '@material-ui/icons';
 import './AdminLibrary.scss';
 import {Link} from "react-router-dom";
-import AdminAddLibraryInformationRessource from "./admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource";
+import AdminAddLibraryInformationRessource
+    from "./admin-library-ressource/admin-add-library-information-resource/AdminAddLibraryInformationResource";
 
 class AdminLibrary extends Component {
 
@@ -117,13 +118,15 @@ class AdminLibrary extends Component {
             />
 
 
-
             <table>
+                <thead>
                 <tr>
                     <th>التغييرات</th>
                     <th>الوصف</th>
                     <th>العنوان</th>
                 </tr>
+                </thead>
+                <tbody>
                 {this.state.libraries.map((library) => (
                     <tr key={library.id}>
                         <td>
@@ -154,6 +157,7 @@ class AdminLibrary extends Component {
                         </td>
                     </tr>
                 ))}
+                </tbody>
             </table>
 
         </div>

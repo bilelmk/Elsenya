@@ -28,6 +28,7 @@ function AdminInformationDeleteRessource (props) {
         axios.delete(baseURL +"information-resources/" + props.data.id , { data : {content : props.data.content }})
             .then(res => {
                 props.close();
+                props.updateTable("delete" , props.data)
                 setOpen(true) ;
                 setMessage( "تم الحذف بنجاح") ;
                 setStatus("success");

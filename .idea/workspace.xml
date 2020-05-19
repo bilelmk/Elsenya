@@ -3,11 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="eeb00e23-536b-4d86-ad34-4b6a6da9efe6" name="Default Changelist" comment="refactor signuo and signin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/routes/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/back/routes/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/containers/home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/utils/baseURL.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/utils/baseURL.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-information/AdminInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-information/AdminInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-information/admin-information-ressource/AdminInformationRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-information/admin-information-ressource/AdminInformationRessource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-information/admin-information-ressource/admin-information-delete-ressource/AdminInformationDeleteRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-information/admin-information-ressource/admin-information-delete-ressource/AdminInformationDeleteRessource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/AdminLibrary.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/AdminLibrary.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/AdminLibraryRessource.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/admin/admin-library/admin-library-ressource/AdminLibraryRessource.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/home-map/HomeMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/home-map/HomeMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/signUpPage/SignUpPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/signUpPage/SignUpPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/containers/toolbar/Toolbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/containers/toolbar/Toolbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +61,7 @@
       <workItem from="1589039270097" duration="5436000" />
       <workItem from="1589064611297" duration="4486000" />
       <workItem from="1589277478901" duration="25528000" />
-      <workItem from="1589905100194" duration="2499000" />
+      <workItem from="1589905100194" duration="6730000" />
     </task>
     <servers />
   </component>
@@ -114,9 +117,9 @@
       <screen x="67" y="27" width="1299" height="741" />
     </state>
     <state x="484" y="316" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1299.741@67.27.1299.741" timestamp="1589905217524" />
-    <state x="131" y="27" width="883" height="741" key="find.popup" timestamp="1589294729234">
+    <state x="131" y="27" width="883" height="741" key="find.popup" timestamp="1589911721877">
       <screen x="67" y="27" width="1299" height="741" />
     </state>
-    <state x="131" y="27" width="883" height="741" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1589294729234" />
+    <state x="131" y="27" width="883" height="741" key="find.popup/67.27.1299.741@67.27.1299.741" timestamp="1589911721877" />
   </component>
 </project>
