@@ -48,6 +48,10 @@ const User = sequelize.define('user' , {
     latitude : {
         type : Sequelize.DOUBLE ,
         allowNull : false ,
+    },
+    isAdmin : {
+        type : Sequelize.BOOLEAN ,
+        allowNull : false ,
     }
 });
 

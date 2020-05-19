@@ -6,7 +6,7 @@ import Library from "../library/Library";
 import HomeMap from "../home-map/HomeMap";
 import Information from "../information/Information";
 import SignUp from "../signUpPage/SignUpPage";
-import SideBar from "../sidebar/SideBar";
+import SideBar from "../sideBar/SideBar";
 import Welcome from "../welcome/Welcome";
 import SignIn from "../signInPage/SignInPage";
 import Footer from "../footer/Footer";

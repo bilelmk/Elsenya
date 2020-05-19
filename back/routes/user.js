@@ -18,6 +18,7 @@ router.post("/signup", (req, res, next) => {
         comment: req.body.comment,
         agriculture:req.body.agriculture,
         governorate : req.body.governorate,
+        isAdmin:false
       })
       .then(result => {
         res.status(201).json({
@@ -45,6 +46,8 @@ router.post("/login", (req, res, next) => {
         });
       }
       fetchedUser = user;
+      if(!user.isAdmin) throw new Error()
+
       return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
@@ -65,7 +68,7 @@ router.post("/login", (req, res, next) => {
     })
     .catch(err => {
       return res.status(401).json({
-        message: "Auth failed"
+        message: "unautorized"
       });
     });
 });
