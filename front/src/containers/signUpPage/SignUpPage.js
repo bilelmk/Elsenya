@@ -1,10 +1,7 @@
 import React, { useEffect, useState ,  useRef } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import baseURL from "../../utils/baseURL";
@@ -12,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Map , Marker , Popup , TileLayer} from "react-leaflet";
+import { Map , Marker , TileLayer} from "react-leaflet";
 import MyBackdrop from "../../components/backdrop/MyBackdrop";
 import Snachbar from "../../components/snackbar/Snackbar";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
@@ -306,7 +303,6 @@ function SignUp() {
                     <TextValidator
                         dir="rtl"
                         variant="outlined"
-                        required
                         fullWidth
                         name="comment"
                         label="تعليق"
@@ -315,8 +311,6 @@ function SignUp() {
                         autoComplete="Comment"
                         value={comment}
                         onChange={e => setComment(e.target.value)}
-                        validators={['required']}
-                        errorMessages={['this field is required']}
                     />
                   </div>
                 </div>

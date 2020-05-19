@@ -1,0 +1,148 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .choice-content {
+    background: rgba(104, 145, 62, 0.17) ;
+    border-bottom: 7px solid #3f915e;
+    p {
+      line-height: 1.8;
+      font-size: 13px;
+      text-align: right;
+      padding: 10px;
+      margin: 0;
+    }
+
+    h2 {
+      background-color: #3f915e ;
+      color: #eee;
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .choice-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin : 2% 0 5% 0 ;
+      border-bottom: 7px solid #3f915e;
+      .choice-th{
+        font-size: 13px;
+        text-align: center;
+        padding: 15px;
+      }
+      .choice-td {
+        line-height: 1.8;
+        font-size: 13px;
+        width: 33%;
+        text-align: center;
+        padding: 5px;
+        background: rgba(104, 145, 62, 0.17) ;
+      }
+      .choice-tr:nth-child(even){background-color: #f2f2f2}
+      .choice-th {
+        background-color: #3f915e ;
+        color: #eee;
+      }
+
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .choice-content {
+    background: rgba(104, 145, 62, 0.17) ;
+    border-bottom: 7px solid #3f915e;
+    p {
+      line-height: 1.8;
+      font-size: 15px;
+      text-align: right;
+      padding: 10px;
+      margin: 0;
+    }
+
+    h2 {
+      background-color: #3f915e ;
+      color: #eee;
+      font-size: 15px;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .choice-table {
+      border-collapse: collapse;
+      width: 80%;
+      margin : 0 10% 3% 10% ;
+      border-bottom: 7px solid #3f915e;
+      .choice-th{
+        font-size: 15px;
+        text-align: center;
+        padding: 18px;
+      }
+      .choice-td {
+        line-height: 1.8;
+        font-size: 15px;
+        width: 33%;
+        text-align: center;
+        padding: 10px;
+        background: rgba(104, 145, 62, 0.17) ;
+      }
+      .choice-tr:nth-child(even){background-color: #f2f2f2}
+      .choice-th {
+        background-color: #3f915e ;
+        color: #eee;
+      }
+
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .choice-content {
+    border-bottom: 7px solid #3f915e;
+
+    p {
+      font-size: 17px;
+      padding: 25px;
+    }
+
+    h2 {
+      font-size: 17px;
+      padding: 17px;
+    }
+
+    .choice-table {
+      .choice-th {
+        font-size: 17px;
+        padding: 18px;
+      }
+
+      .choice-td {
+        font-size: 17px;
+        padding: 15px;
+      }
+
+    }
+  }
+}
+
+
+.center {
+  text-align: center !important;
+}
+
+.margin-left {
+  margin-left: 15px;
+}
+

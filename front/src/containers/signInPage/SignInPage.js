@@ -25,15 +25,19 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: "#3f915e;" ,
     },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
     submit: {
-        margin: theme.spacing(3, 0, 2),
-    },
+        "&:hover": {
+            backgroundColor: "#366e43" ,
+        },
+        backgroundColor: "#3f915e;" ,
+        margin: theme.spacing(3, 0, 2)
+    }
 }));
 
 export default function SignIn() {
@@ -77,37 +81,34 @@ export default function SignIn() {
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
                 </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
+
                 <form className={classes.form} noValidate>
                     <TextField
+                        dir="rtl"
                         variant="outlined"
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="عنوان البريد الإلكتروني"
                         name="email"
                         autoComplete="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
-                    <TextField
+                    <TextField style={{marginTop : "20px"}}
+                       dir="rtl"
                         variant="outlined"
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label="كلمة المرور"
                         type="password"
                         id="password"
                         autoComplete="current-password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
-                    />
+
                     <Button
                         type="submit"
                         fullWidth
@@ -118,13 +119,7 @@ export default function SignIn() {
                     >
                         Sign In
                     </Button>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                    </Grid>
+
                 </form>
             </div>
         </Container>

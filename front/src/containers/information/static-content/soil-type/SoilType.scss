@@ -1,0 +1,150 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .soil-content {
+    background: rgba(104, 145, 62, 0.17) ;
+    border-bottom: 7px solid #3f915e;
+    p {
+      line-height: 1.8;
+      font-size: 13px;
+      text-align: right;
+      padding: 10px;
+      margin: 0;
+    }
+
+    h2 {
+      background-color: #3f915e ;
+      color: #eee;
+      font-size: 13px;
+      text-align: center;
+      padding: 15px;
+    }
+
+    .soil-table {
+      border-collapse: collapse;
+      width: 100%;
+      margin : 2% 0 5% 0 ;
+      border-bottom: 7px solid #3f915e;
+      .soil-th{
+        font-size: 13px;
+        text-align: center;
+        padding: 15px;
+      }
+      .soil-td {
+        line-height: 1.8;
+        font-size: 13px;
+        width: 33%;
+        text-align: center;
+        padding: 5px;
+        background: rgba(104, 145, 62, 0.17) ;
+      }
+      .soil-tr:nth-child(even){background-color: #f2f2f2}
+      .soil-th {
+        background-color: #3f915e ;
+        color: #eee;
+      }
+
+    }
+    .soil-img {
+      width: 100%;
+      margin: 5% 0 ;
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .soil-content {
+    background: rgba(104, 145, 62, 0.17) ;
+    border-bottom: 7px solid #3f915e;
+    p {
+      line-height: 1.8;
+      font-size: 15px;
+      text-align: right;
+      padding: 10px;
+      margin: 0;
+    }
+
+    h2 {
+      background-color: #3f915e ;
+      color: #eee;
+      font-size: 15px;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .soil-table {
+      border-collapse: collapse;
+      width: 80%;
+      margin : 0 10% 3% 10% ;
+      border-bottom: 7px solid #3f915e;
+      .soil-th{
+        font-size: 15px;
+        text-align: center;
+        padding: 18px;
+      }
+      .soil-td {
+        line-height: 1.8;
+        font-size: 15px;
+        width: 33%;
+        text-align: center;
+        padding: 10px;
+        background: rgba(104, 145, 62, 0.17) ;
+      }
+      .soil-tr:nth-child(even){background-color: #f2f2f2}
+      .soil-th {
+        background-color: #3f915e ;
+        color: #eee;
+      }
+
+    }
+    .soil-img {
+      width: 100%;
+      margin: 5% 0 ;
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .soil-content {
+    border-bottom: 7px solid #3f915e;
+
+    p {
+      font-size: 17px;
+      padding: 25px;
+    }
+
+    h2 {
+      font-size: 17px;
+      padding: 17px;
+    }
+
+    .soil-table {
+      .soil-th {
+        font-size: 17px;
+        padding: 18px;
+      }
+
+      .soil-td {
+        font-size: 17px;
+        padding: 15px;
+      }
+
+    }
+
+    .soil-img {
+      width: 80%;
+      margin: 5% 10%;
+    }
+  }
+}

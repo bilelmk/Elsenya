@@ -1,27 +1,46 @@
 
 
 .slide_1 {
-
-  background-image: linear-gradient( to left , rgba(71, 117, 83, 0.5) ,  rgba(76, 126, 89, 0.6)) , url("/assets/img2.jpg");
+  background-image: linear-gradient( to left , rgba(47, 55, 65, 0.5), rgba(48, 48, 48, 0.91)) , url("/assets/img2.jpg");
   background-size: cover;
   height: 75vh;
   background-position: center;
 }
 
 .slide_2 {
-  background-image: linear-gradient( to right , rgba(71, 117, 83, 0.5) ,  rgba(76, 126, 89, 0.6))  ,  url("/assets/img3.jpg");
+  background-image: linear-gradient( to right , rgba(47, 55, 65, 0.5),   rgba(48, 48, 48, 0.91))  ,  url("/assets/img3.jpg");
   background-size: cover;
   height: 75vh;
   background-position: center;
 }
 
 .slide_3 {
-  background-image: linear-gradient( to left , rgba(71, 117, 83, 0.5) ,  rgba(76, 126, 89, 0.6))  ,  url("/assets/img1.jfif");
+  background-image: linear-gradient( to left , rgba(47, 55, 65, 0.5),   rgba(48, 48, 48, 0.91))  ,  url("/assets/img1.jfif");
   background-size: cover;
   height: 75vh ;
   background-position: center;
 }
 
+
+.carousel-text-left {
+  margin : 0 ;
+  background-color: #3f915e ;
+  padding: 40px ;
+  position: relative;
+  top : 30vh ;
+  left:  0;
+  display: inline-block;
+}
+
+.carousel-text-right {
+  margin : 0 ;
+  background-color: #3f915e ;
+  padding: 40px ;
+  position: relative;
+  top : 30vh ;
+  float: right;
+  display: inline-block;
+}
 
 
 //animation
